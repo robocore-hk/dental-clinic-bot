@@ -19,7 +19,7 @@ android {
         targetSdk = 30       // temi V3 runs Android 11
         versionCode = 1
         versionName = "1.0.0"
-        buildConfigField("String", "DEFAULT_API", "\"${project.findProperty("zeeno.api") ?: "https://zeeno-dental.example.workers.dev"}\"")
+        buildConfigField("String", "DEFAULT_API", "\"${project.findProperty("zeeno.api") ?: "https://zeeno-dental.robocore-hk.workers.dev"}\"")
     }
     signingConfigs {
         if (keystoreProps.isNotEmpty()) create("release") {

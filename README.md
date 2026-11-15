@@ -69,7 +69,7 @@ Until a robot is paired it uses the bundled sample clinic in `android/app/src/ma
 2. On the robot, open the gear, enter the staff PIN, and type the code.
 3. Content, destinations, and the PIN then come from that clinic.
 
-The server address can be changed for a build with `-Pzeeno.api=https://…`. The default in source is a placeholder, not a live deployment.
+The release app talks to `https://zeeno-dental.robocore-hk.workers.dev`. Override that with `-Pzeeno.api=https://…` if you build against another worker.
 
 ## Dashboard
 
@@ -111,7 +111,7 @@ cd android
 Override the API at build time:
 
 ```bash
-./gradlew :app:assembleRelease -Pzeeno.api=https://zeeno-dental.<account>.workers.dev
+./gradlew :app:assembleRelease -Pzeeno.api=https://zeeno-dental.robocore-hk.workers.dev
 ```
 
 ## Dashboard and Worker
@@ -139,7 +139,7 @@ CF_API_TOKEN=… CF_ACCOUNT_ID=… BOOTSTRAP_ADMIN='admin@example.com:password' 
 
 `BOOTSTRAP_ADMIN` creates the first admin only when the users table is empty. Do not commit tokens or that password.
 
-There is no production deploy of this project yet. Point the robot at the workers.dev URL you get from `deploy.py`.
+The live worker is `https://zeeno-dental.robocore-hk.workers.dev`. `deploy.py` prints the URL again when you upload a new build.
 
 ## Launch scope and Phase 2
 
