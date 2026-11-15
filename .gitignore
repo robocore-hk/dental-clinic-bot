@@ -1,0 +1,17 @@
+node_modules/
+dist/
+.gradle/
+build/
+local.properties
+keystore.properties
+*.jks
+*.keystore
+.idea/
+*.iml
+.DS_Store
+.wrangler/
+server/src/static.ts
+server/dist/
+dashboard/dist/
+*.apk
+!releases/*.apk

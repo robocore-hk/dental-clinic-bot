@@ -1,0 +1,1329 @@
+{
+ "clinic": {
+  "name": "Northline Dental",
+  "address": "120 Example Avenue, Suite 400",
+  "phone": "(000) 555-0148",
+  "email": "hello@northline.example",
+  "website": "",
+  "hours": {
+   "en": "Mon–Fri 8:00–17:00, Sat 9:00–13:00. Closed Sunday.",
+   "es": "Lun–vie 8:00–17:00, sáb 9:00–13:00. Domingo cerrado.",
+   "zh-Hans": "周一至周五 8:00–17:00，周六 9:00–13:00。周日休息。",
+   "zh-Hant": "週一至週五 8:00–17:00，週六 9:00–13:00。週日休息。"
+  },
+  "parking": {
+   "en": "Visitor parking is in the garage under the building. Take a ticket at the barrier. The first hour is validated at reception when you check in with the team. Street parking is limited. The clinic cannot reserve a specific space.",
+   "es": "El estacionamiento para visitas está en el garaje del edificio. Tome un ticket en la barrera. Recepción valida la primera hora cuando el equipo registra su llegada. El estacionamiento en la calle es limitado. La clínica no puede reservar un lugar concreto.",
+   "zh-Hans": "访客停车位在大楼地下车库。入口栏杆处取票。您向前台完成到达登记后，前台可盖章减免第一小时。路边车位有限。诊所不能保留指定车位。",
+   "zh-Hant": "訪客停車位在大樓地下車庫。入口欄杆處取票。您向前台完成到達登記後，前台可蓋章減免第一小時。路邊車位有限。診所不能保留指定車位。"
+  },
+  "payment": {
+   "en": "Reception can take major cards and cash. Some visits are billed after the dentist confirms what was done. Zeeno cannot quote your personal fee or check insurance. Please ask reception about estimates, receipts and any plan you use.",
+   "es": "Recepción acepta las principales tarjetas y efectivo. Algunas visitas se cobran después de que el dentista confirme lo realizado. Zeeno no puede decirle su tarifa personal ni comprobar un seguro. Pregunte en recepción por presupuestos, recibos y el plan que utilice.",
+   "zh-Hans": "前台接受常用银行卡和现金。有些费用会在牙医确认实际治疗后结算。Zeeno 不能报出您的个人费用，也不能查询保险。估价、收据和您使用的保险计划，请向前台询问。",
+   "zh-Hant": "前台接受常用銀行卡和現金。有些費用會在牙醫確認實際治療後結算。Zeeno 不能報出您的個人費用，也不能查詢保險。估價、收據和您使用的保險計劃，請向前台詢問。"
+  },
+  "accessibility": {
+   "en": "The entrance is step-free and the waiting room has space for a wheelchair. An accessible restroom is signed from reception. If you need extra time, a quieter space, or help moving through the clinic, use Contact reception and choose accessibility assistance. A team member will come to you. Do not follow the robot into a treatment room unless staff have confirmed it is ready.",
+   "es": "La entrada no tiene escalón y la sala de espera tiene espacio para una silla de ruedas. El aseo accesible está señalizado desde recepción. Si necesita más tiempo, un lugar más tranquilo o ayuda para moverse, use Contactar recepción y elija asistencia de accesibilidad. Una persona del equipo vendrá. No siga al robot a una sala de tratamiento hasta que el personal confirme que está lista.",
+   "zh-Hans": "入口没有台阶，候诊区可以停放轮椅。无障碍洗手间有从前台开始的指示。如果您需要更多时间、更安静的地方，或需要帮助在诊所内移动，请使用“联系前台”并选择无障碍协助。会有工作人员过来。在工作人员确认治疗室准备好之前，请不要跟随机器人进入治疗室。",
+   "zh-Hant": "入口沒有台階，候診區可以停放輪椅。無障礙洗手間有從前台開始的指示。如果您需要更多時間、更安靜的地方，或需要幫助在診所內移動，請使用「聯絡前台」並選擇無障礙協助。會有工作人員過來。在工作人員確認治療室準備好之前，請不要跟隨機器人進入治療室。"
+  },
+  "welcome": {
+   "en": "Hello. I am Zeeno. I can help you tell reception you are here, find your way, and read what the clinic has approved.",
+   "es": "Hola. Soy Zeeno. Puedo ayudar a avisar a recepción de que está aquí, orientarse y leer lo que la clínica ha aprobado.",
+   "zh-Hans": "您好。我是 Zeeno。我可以帮您通知前台已经到达、找路，以及阅读诊所已审核的内容。",
+   "zh-Hant": "您好。我是 Zeeno。我可以幫您通知前台已經到達、找路，以及閱讀診所已審核的內容。"
+  },
+  "reviewer": "Dr. Elena Cho",
+  "data_source_url": ""
+ },
+ "dentists": [
+  {
+   "name": "Dr. Elena Cho",
+   "role": "General dentist",
+   "bio": {
+    "en": "General and preventive dentistry. Reviews the clinic's patient-facing explanations.",
+    "es": "Odontología general y preventiva. Revisa las explicaciones para pacientes de la clínica.",
+    "zh-Hans": "从事综合牙科和预防牙科。负责审阅诊所面向患者的说明。",
+    "zh-Hant": "從事綜合牙科和預防牙科。負責審閱診所面向患者的說明。"
+   },
+   "languages": [
+    "en",
+    "es",
+    "zh-Hans",
+    "zh-Hant"
+   ],
+   "specialties": "General dentistry, prevention",
+   "photo_url": ""
+  },
+  {
+   "name": "Dr. Mateo Ruiz",
+   "role": "Orthodontist",
+   "bio": {
+    "en": "Braces and aligners for children and adults.",
+    "es": "Ortodoncia con brackets y alineadores para niños y adultos.",
+    "zh-Hans": "为儿童和成人做固定矫正和隐形矫正。",
+    "zh-Hant": "為兒童和成人做固定矯正和隱形矯正。"
+   },
+   "languages": [
+    "en",
+    "es"
+   ],
+   "specialties": "Orthodontics",
+   "photo_url": ""
+  },
+  {
+   "name": "Dr. Mei Lin",
+   "role": "Endodontist",
+   "bio": {
+    "en": "Root canal treatment. Patients are referred by the general dentists in this clinic.",
+    "es": "Endodoncia. Los dentistas generales de esta clínica derivan a los pacientes.",
+    "zh-Hans": "负责根管治疗。由本诊所的综合牙医转诊。",
+    "zh-Hant": "負責根管治療。由本診所的綜合牙醫轉診。"
+   },
+   "languages": [
+    "en",
+    "zh-Hans",
+    "zh-Hant"
+   ],
+   "specialties": "Endodontics",
+   "photo_url": ""
+  }
+ ],
+ "destinations": [
+  {
+   "location_name": "reception",
+   "kind": "reception",
+   "requires_staff": 0,
+   "sort_order": 1,
+   "label": {
+    "en": "Reception",
+    "es": "Recepción",
+    "zh-Hans": "前台",
+    "zh-Hant": "前台"
+   },
+   "note": {
+    "en": "Reception is the desk by the front door. If the hallway is busy, wait here and a team member can walk with you.",
+    "es": "Recepción es el mostrador junto a la puerta. Si el pasillo está lleno, espere aquí y alguien del equipo puede acompañarle.",
+    "zh-Hans": "前台在正门旁边。如果走廊拥挤，请在这里等候，工作人员可以陪您过去。",
+    "zh-Hant": "前台在正門旁邊。如果走廊擁擠，請在這裡等候，工作人員可以陪您過去。"
+   }
+  },
+  {
+   "location_name": "waiting area",
+   "kind": "waiting",
+   "requires_staff": 0,
+   "sort_order": 2,
+   "label": {
+    "en": "Waiting area",
+    "es": "Sala de espera",
+    "zh-Hans": "候诊区",
+    "zh-Hant": "候診區"
+   },
+   "note": {
+    "en": "The waiting area is the seating just past reception. Stay where the team can see you.",
+    "es": "La sala de espera son los asientos justo después de recepción. Quédese donde el equipo pueda verle.",
+    "zh-Hans": "候诊区在前台进去后的座位。请留在工作人员看得到的地方。",
+    "zh-Hant": "候診區在前台進去後的座位。請留在工作人員看得到的地方。"
+   }
+  },
+  {
+   "location_name": "consult entrance",
+   "kind": "consultation",
+   "requires_staff": 0,
+   "sort_order": 3,
+   "label": {
+    "en": "Consultation entrance",
+    "es": "Entrada de consulta",
+    "zh-Hans": "咨询室入口",
+    "zh-Hant": "諮詢室入口"
+   },
+   "note": {
+    "en": "Stop at the consultation entrance. Do not go into a treatment room from here unless a staff member is with you.",
+    "es": "Deténgase en la entrada de consulta. No entre en una sala de tratamiento desde aquí salvo que le acompañe personal.",
+    "zh-Hans": "请停在咨询室入口。除非有工作人员陪同，否则不要从这里进入治疗室。",
+    "zh-Hant": "請停在諮詢室入口。除非有工作人員陪同，否則不要從這裡進入治療室。"
+   }
+  },
+  {
+   "location_name": "treatment 1",
+   "kind": "treatment",
+   "requires_staff": 1,
+   "sort_order": 4,
+   "label": {
+    "en": "Treatment room 1",
+    "es": "Sala de tratamiento 1",
+    "zh-Hans": "治疗室 1",
+    "zh-Hant": "治療室 1"
+   },
+   "note": {
+    "en": "Treatment room 1 is past the consultation entrance. Zeeno will wait until a staff member confirms the room is ready.",
+    "es": "La sala de tratamiento 1 está después de la entrada de consulta. Zeeno esperará a que el personal confirme que la sala está lista.",
+    "zh-Hans": "治疗室 1 在咨询室入口里面。Zeeno 会等到工作人员确认房间准备好。",
+    "zh-Hant": "治療室 1 在諮詢室入口裡面。Zeeno 會等到工作人員確認房間準備好。"
+   }
+  }
+ ],
+ "content": [
+  {
+   "kind": "faq",
+   "slug": "hours",
+   "category": "hours",
+   "sort_order": 1,
+   "version_label": "1.0",
+   "reviewer": "Dr. Elena Cho",
+   "approved": 1,
+   "media_kind": "text",
+   "media_url": "",
+   "title": {
+    "en": "Opening hours",
+    "es": "Horario",
+    "zh-Hans": "开放时间",
+    "zh-Hant": "開放時間"
+   },
+   "body": {
+    "en": "Northline Dental is open Monday to Friday, 8:00 to 17:00, and Saturday 9:00 to 13:00. The clinic is closed on Sunday. Please arrive a few minutes early so reception can greet you. Hours can change on holidays; reception will confirm the day you visit.",
+    "es": "Northline Dental abre de lunes a viernes de 8:00 a 17:00 y los sábados de 9:00 a 13:00. El domingo está cerrado. Llegue unos minutos antes para que recepción pueda recibirle. El horario puede cambiar en días festivos; recepción se lo confirmará.",
+    "zh-Hans": "Northline Dental 的开放时间为周一至周五 8:00 至 17:00，周六 9:00 至 13:00。周日休息。请提前几分钟到达，以便前台接待。节假日时间可能调整，当天请以前台确认为准。",
+    "zh-Hant": "Northline Dental 的開放時間為週一至週五 8:00 至 17:00，週六 9:00 至 13:00。週日休息。請提前幾分鐘到達，以便前台接待。節假日時間可能調整，當天請以前台確認為準。"
+   }
+  },
+  {
+   "kind": "faq",
+   "slug": "services",
+   "category": "services",
+   "sort_order": 2,
+   "version_label": "1.0",
+   "reviewer": "Dr. Elena Cho",
+   "approved": 1,
+   "media_kind": "text",
+   "media_url": "",
+   "title": {
+    "en": "Services we offer",
+    "es": "Servicios",
+    "zh-Hans": "诊疗项目",
+    "zh-Hant": "診療項目"
+   },
+   "body": {
+    "en": "The clinic provides examinations, professional cleaning, fillings, crowns, root canal treatment, extractions, implants and braces. Not every visit includes treatment. The dentist will explain options after an examination. Zeeno can describe these procedures in general. Zeeno does not decide which one is right for you.",
+    "es": "La clínica ofrece revisiones, limpieza profesional, empastes, coronas, endodoncia, extracciones, implantes y ortodoncia. No todas las visitas incluyen tratamiento. El dentista explicará las opciones después de examinarle. Zeeno puede describir estos procedimientos en general. Zeeno no decide cuál le conviene.",
+    "zh-Hans": "诊所提供检查、专业洁牙、补牙、牙冠、根管治疗、拔牙、种植和矫正。不是每次就诊都会做治疗。牙医会在检查后说明可以选择的方案。Zeeno 只能做一般说明，不会替您决定该做哪一项。",
+    "zh-Hant": "診所提供檢查、專業潔牙、補牙、牙冠、根管治療、拔牙、植牙和矯正。不是每次就診都會做治療。牙醫會在檢查後說明可以選擇的方案。Zeeno 只能做一般說明，不會替您決定該做哪一項。"
+   }
+  },
+  {
+   "kind": "faq",
+   "slug": "accessibility",
+   "category": "accessibility",
+   "sort_order": 3,
+   "version_label": "1.0",
+   "reviewer": "Dr. Elena Cho",
+   "approved": 1,
+   "media_kind": "text",
+   "media_url": "",
+   "title": {
+    "en": "Accessibility",
+    "es": "Accesibilidad",
+    "zh-Hans": "无障碍",
+    "zh-Hant": "無障礙"
+   },
+   "body": {
+    "en": "The entrance is step-free and the waiting room has space for a wheelchair. An accessible restroom is signed from reception. If you need extra time, a quieter space, or help moving through the clinic, use Contact reception and choose accessibility assistance. A team member will come to you. Do not follow the robot into a treatment room unless staff have confirmed it is ready.",
+    "es": "La entrada no tiene escalón y la sala de espera tiene espacio para una silla de ruedas. El aseo accesible está señalizado desde recepción. Si necesita más tiempo, un lugar más tranquilo o ayuda para moverse, use Contactar recepción y elija asistencia de accesibilidad. Una persona del equipo vendrá. No siga al robot a una sala de tratamiento hasta que el personal confirme que está lista.",
+    "zh-Hans": "入口没有台阶，候诊区可以停放轮椅。无障碍洗手间有从前台开始的指示。如果您需要更多时间、更安静的地方，或需要帮助在诊所内移动，请使用“联系前台”并选择无障碍协助。会有工作人员过来。在工作人员确认治疗室准备好之前，请不要跟随机器人进入治疗室。",
+    "zh-Hant": "入口沒有台階，候診區可以停放輪椅。無障礙洗手間有從前台開始的指示。如果您需要更多時間、更安靜的地方，或需要幫助在診所內移動，請使用「聯絡前台」並選擇無障礙協助。會有工作人員過來。在工作人員確認治療室準備好之前，請不要跟隨機器人進入治療室。"
+   }
+  },
+  {
+   "kind": "faq",
+   "slug": "payment",
+   "category": "payment",
+   "sort_order": 4,
+   "version_label": "1.0",
+   "reviewer": "Dr. Elena Cho",
+   "approved": 1,
+   "media_kind": "text",
+   "media_url": "",
+   "title": {
+    "en": "Payment",
+    "es": "Pago",
+    "zh-Hans": "付款",
+    "zh-Hant": "付款"
+   },
+   "body": {
+    "en": "Reception can take major cards and cash. Some visits are billed after the dentist confirms what was done. Zeeno cannot quote your personal fee or check insurance. Please ask reception about estimates, receipts and any plan you use.",
+    "es": "Recepción acepta las principales tarjetas y efectivo. Algunas visitas se cobran después de que el dentista confirme lo realizado. Zeeno no puede decirle su tarifa personal ni comprobar un seguro. Pregunte en recepción por presupuestos, recibos y el plan que utilice.",
+    "zh-Hans": "前台接受常用银行卡和现金。有些费用会在牙医确认实际治疗后结算。Zeeno 不能报出您的个人费用，也不能查询保险。估价、收据和您使用的保险计划，请向前台询问。",
+    "zh-Hant": "前台接受常用銀行卡和現金。有些費用會在牙醫確認實際治療後結算。Zeeno 不能報出您的個人費用，也不能查詢保險。估價、收據和您使用的保險計劃，請向前台詢問。"
+   }
+  },
+  {
+   "kind": "faq",
+   "slug": "parking",
+   "category": "parking",
+   "sort_order": 5,
+   "version_label": "1.0",
+   "reviewer": "Dr. Elena Cho",
+   "approved": 1,
+   "media_kind": "text",
+   "media_url": "",
+   "title": {
+    "en": "Parking",
+    "es": "Estacionamiento",
+    "zh-Hans": "停车",
+    "zh-Hant": "停車"
+   },
+   "body": {
+    "en": "Visitor parking is in the garage under the building. Take a ticket at the barrier. The first hour is validated at reception when you check in with the team. Street parking is limited. The clinic cannot reserve a specific space.",
+    "es": "El estacionamiento para visitas está en el garaje del edificio. Tome un ticket en la barrera. Recepción valida la primera hora cuando el equipo registra su llegada. El estacionamiento en la calle es limitado. La clínica no puede reservar un lugar concreto.",
+    "zh-Hans": "访客停车位在大楼地下车库。入口栏杆处取票。您向前台完成到达登记后，前台可盖章减免第一小时。路边车位有限。诊所不能保留指定车位。",
+    "zh-Hant": "訪客停車位在大樓地下車庫。入口欄杆處取票。您向前台完成到達登記後，前台可蓋章減免第一小時。路邊車位有限。診所不能保留指定車位。"
+   }
+  },
+  {
+   "kind": "faq",
+   "slug": "appointments",
+   "category": "appointments",
+   "sort_order": 6,
+   "version_label": "1.0",
+   "reviewer": "Dr. Elena Cho",
+   "approved": 1,
+   "media_kind": "text",
+   "media_url": "",
+   "title": {
+    "en": "Appointment procedure",
+    "es": "Cómo son las citas",
+    "zh-Hans": "预约流程",
+    "zh-Hant": "預約流程"
+   },
+   "body": {
+    "en": "If you already have an appointment, tell reception you have arrived. Zeeno can send an arrival notice, but that notice does not complete check-in in a booking system. If you do not have an appointment, Zeeno can send a request with the service you hope to discuss, a preferred day and a way to reach you. A request is not a confirmed appointment. Reception will contact you.",
+    "es": "Si ya tiene cita, avise en recepción de que ha llegado. Zeeno puede enviar un aviso de llegada, pero ese aviso no completa el registro en un sistema de citas. Si no tiene cita, Zeeno puede enviar una solicitud con el servicio que desea comentar, un día preferido y una forma de contactarle. Una solicitud no es una cita confirmada. Recepción le contactará.",
+    "zh-Hans": "如果您已经有预约，请向前台说明您已到达。Zeeno 可以发送到达通知，但这不会在预约系统里完成签到。如果您还没有预约，Zeeno 可以把您希望咨询的项目、方便的日期和联系方式发给前台。请求不是已确认的预约。前台会再联系您。",
+    "zh-Hant": "如果您已經有預約，請向前台說明您已到達。Zeeno 可以發送到達通知，但這不會在預約系統裡完成簽到。如果您還沒有預約，Zeeno 可以把您希望諮詢的項目、方便的日期和聯絡方式發給前台。請求不是已確認的預約。前台會再聯絡您。"
+   }
+  },
+  {
+   "kind": "faq",
+   "slug": "what-to-bring",
+   "category": "appointments",
+   "sort_order": 7,
+   "version_label": "1.0",
+   "reviewer": "Dr. Elena Cho",
+   "approved": 1,
+   "media_kind": "text",
+   "media_url": "",
+   "title": {
+    "en": "What to bring",
+    "es": "Qué traer",
+    "zh-Hans": "需要携带什么",
+    "zh-Hant": "需要攜帶什麼"
+   },
+   "body": {
+    "en": "Bring your appointment details if you have them, a list of medicines you take, and any questions you wrote down. Bring glasses if you use them to read forms. You do not need to tell Zeeno your medical history. A private form, if the clinic uses one, is handled with the team, not spoken aloud in the waiting room.",
+    "es": "Traiga los datos de su cita si los tiene, una lista de las medicinas que toma y las preguntas que haya anotado. Traiga gafas si las usa para leer formularios. No necesita contar su historia médica a Zeeno. Si la clínica usa un formulario privado, se completa con el equipo, no en voz alta en la sala de espera.",
+    "zh-Hans": "如果您有预约信息，请带上。也可以带上正在服用的药物清单，以及写下的问题。看表格需要眼镜的话请戴上。您不需要向 Zeeno 讲述病史。如果诊所使用私人表格，会由工作人员安排，不会在候诊区大声询问。",
+    "zh-Hant": "如果您有預約信息，請帶上。也可以帶上正在服用的藥物清單，以及寫下的問題。看表格需要眼鏡的話請戴上。您不需要向 Zeeno 講述病史。如果診所使用私人表格，會由工作人員安排，不會在候診區大聲詢問。"
+   }
+  },
+  {
+   "kind": "faq",
+   "slug": "cancellation",
+   "category": "appointments",
+   "sort_order": 8,
+   "version_label": "1.0",
+   "reviewer": "Dr. Elena Cho",
+   "approved": 1,
+   "media_kind": "text",
+   "media_url": "",
+   "title": {
+    "en": "Changing or cancelling",
+    "es": "Cambiar o cancelar",
+    "zh-Hans": "更改或取消",
+    "zh-Hant": "更改或取消"
+   },
+   "body": {
+    "en": "Please tell the clinic as early as you can if you cannot attend. Use the phone number on this screen or ask reception. Zeeno cannot cancel a booking in an outside system. The team will confirm any change with you.",
+    "es": "Avise a la clínica lo antes posible si no puede venir. Use el teléfono de esta pantalla o pregunte en recepción. Zeeno no puede cancelar una reserva en un sistema externo. El equipo confirmará cualquier cambio con usted.",
+    "zh-Hans": "如果不能前来，请尽早告诉诊所。可以拨打本页电话或向前台说明。Zeeno 不能在外部系统里取消预约。任何更改都会由工作人员与您确认。",
+    "zh-Hant": "如果不能前來，請盡早告訴診所。可以撥打本頁電話或向前台說明。Zeeno 不能在外部系統裡取消預約。任何更改都會由工作人員與您確認。"
+   }
+  },
+  {
+   "kind": "explainer",
+   "slug": "cleaning",
+   "category": "cleaning",
+   "sort_order": 1,
+   "version_label": "1.2",
+   "reviewer": "Dr. Elena Cho",
+   "approved": 1,
+   "media_kind": "diagram",
+   "media_url": "",
+   "title": {
+    "en": "Professional cleaning",
+    "es": "Limpieza profesional",
+    "zh-Hans": "专业洁牙",
+    "zh-Hant": "專業潔牙"
+   },
+   "body": {
+    "en": "A cleaning visit usually starts with a look at your gums and teeth. The clinician removes plaque and hard deposits the brush can miss, then polishes the teeth. You may feel vibration or pressure. The visit often ends with advice about home brushing. It does not mean every stain or every gum problem is finished.\n\nThis describes a usual process. It is not a recommendation for you. Only the dentist who examines you can advise on your own care.",
+    "es": "Una limpieza suele empezar con una mirada a las encías y los dientes. El clínico retira la placa y los depósitos duros que el cepillo no alcanza, y después pule los dientes. Puede notar vibración o presión. A menudo termina con consejos para cepillarse en casa. No significa que toda mancha o problema de encías haya terminado.\n\nEsto describe un proceso habitual. No es una recomendación para usted. Solo el dentista que le examine puede aconsejarle sobre su propio cuidado.",
+    "zh-Hans": "洁牙通常会先查看牙齿和牙龈。医护人员会清除牙刷难以刷到的牙菌斑和硬沉积物，然后抛光。您可能会感到震动或压力。结束时常常会说明在家如何刷牙。这并不表示所有牙渍或牙龈问题都已处理完。\n\n这里说明的是通常流程，不是对您个人的建议。只有为您检查的牙医才能就您自己的情况给予建议。",
+    "zh-Hant": "潔牙通常會先查看牙齒和牙齦。醫護人員會清除牙刷難以刷到的牙菌斑和硬沉積物，然後拋光。您可能會感到震動或壓力。結束時常常會說明在家如何刷牙。這並不表示所有牙漬或牙齦問題都已處理完。\n\n這裡說明的是通常流程，不是對您個人的建議。只有為您檢查的牙醫才能就您自己的情況給予建議。"
+   }
+  },
+  {
+   "kind": "explainer",
+   "slug": "fillings",
+   "category": "fillings",
+   "sort_order": 2,
+   "version_label": "1.0",
+   "reviewer": "Dr. Elena Cho",
+   "approved": 1,
+   "media_kind": "diagram",
+   "media_url": "",
+   "title": {
+    "en": "Fillings",
+    "es": "Empastes",
+    "zh-Hans": "补牙",
+    "zh-Hant": "補牙"
+   },
+   "body": {
+    "en": "A filling repairs a tooth after decay or a small break is removed. The dentist numbs the area when needed, cleans the space and places a tooth-coloured or other material the clinic uses. You will be asked to bite gently to check the height. The tooth can feel different for a few days.\n\nThis describes a usual process. It is not a recommendation for you. Only the dentist who examines you can advise on your own care.",
+    "es": "Un empaste repara un diente después de retirar caries o una pequeña fractura. El dentista duerme la zona si hace falta, limpia el espacio y coloca el material que usa la clínica. Le pedirá morder con suavidad para revisar la altura. El diente puede sentirse distinto unos días.\n\nEsto describe un proceso habitual. No es una recomendación para usted. Solo el dentista que le examine puede aconsejarle sobre su propio cuidado.",
+    "zh-Hans": "补牙是在去除蛀坏或小块缺损后修复牙齿。需要时牙医会先局部麻醉，清理后放入诊所使用的材料。会请您轻轻咬合，检查高度。牙齿在几天内可能感觉不一样。\n\n这里说明的是通常流程，不是对您个人的建议。只有为您检查的牙医才能就您自己的情况给予建议。",
+    "zh-Hant": "補牙是在去除蛀壞或小塊缺損後修復牙齒。需要時牙醫會先局部麻醉，清理後放入診所使用的材料。會請您輕輕咬合，檢查高度。牙齒在幾天內可能感覺不一樣。\n\n這裡說明的是通常流程，不是對您個人的建議。只有為您檢查的牙醫才能就您自己的情況給予建議。"
+   }
+  },
+  {
+   "kind": "explainer",
+   "slug": "crowns",
+   "category": "crowns",
+   "sort_order": 3,
+   "version_label": "1.1",
+   "reviewer": "Dr. Elena Cho",
+   "approved": 1,
+   "media_kind": "diagram",
+   "media_url": "",
+   "title": {
+    "en": "Crowns",
+    "es": "Coronas",
+    "zh-Hans": "牙冠",
+    "zh-Hant": "牙冠"
+   },
+   "body": {
+    "en": "A crown is a cap that covers a tooth which is weakened, cracked or heavily restored. The visit often has two stages: shaping the tooth and taking a record, then fitting the finished crown later. A temporary cover may be used in between. The dentist decides whether a crown is suitable after examining the tooth.\n\nThis describes a usual process. It is not a recommendation for you. Only the dentist who examines you can advise on your own care.",
+    "es": "Una corona es una funda que cubre un diente debilitado, agrietado o muy restaurado. La visita suele tener dos etapas: preparar el diente y tomar un registro, y después colocar la corona terminada. Entre medias puede usarse una cubierta temporal. El dentista decide si conviene después de examinar el diente.\n\nEsto describe un proceso habitual. No es una recomendación para usted. Solo el dentista que le examine puede aconsejarle sobre su propio cuidado.",
+    "zh-Hans": "牙冠是罩在脆弱、裂开或已大量修复的牙齿上的牙套。就诊常常分两步：先修整牙齿并取记录，以后再戴上做好的牙冠。中间可能会用临时牙套。是否适合做牙冠，要由牙医检查后决定。\n\n这里说明的是通常流程，不是对您个人的建议。只有为您检查的牙医才能就您自己的情况给予建议。",
+    "zh-Hant": "牙冠是罩在脆弱、裂開或已大量修復的牙齒上的牙套。就診常常分兩步：先修整牙齒並取記錄，以後再戴上做好的牙冠。中間可能會用臨時牙套。是否適合做牙冠，要由牙醫檢查後決定。\n\n這裡說明的是通常流程，不是對您個人的建議。只有為您檢查的牙醫才能就您自己的情況給予建議。"
+   }
+  },
+  {
+   "kind": "explainer",
+   "slug": "root-canals",
+   "category": "root-canal",
+   "sort_order": 4,
+   "version_label": "1.0",
+   "reviewer": "Dr. Elena Cho",
+   "approved": 1,
+   "media_kind": "diagram",
+   "media_url": "",
+   "title": {
+    "en": "Root canal treatment",
+    "es": "Endodoncia",
+    "zh-Hans": "根管治疗",
+    "zh-Hant": "根管治療"
+   },
+   "body": {
+    "en": "Root canal treatment cleans the soft space inside a tooth when that space is inflamed or infected. The dentist uses small instruments, places a dressing or filling inside, and often covers the tooth afterwards. You are usually numb for the procedure. Some tenderness afterwards is common. It is not the same decision as removing the tooth.\n\nThis describes a usual process. It is not a recommendation for you. Only the dentist who examines you can advise on your own care.",
+    "es": "La endodoncia limpia el espacio blando del interior del diente cuando está inflamado o infectado. El dentista usa instrumentos pequeños, coloca un apósito o empaste dentro y a menudo cubre el diente después. Normalmente la zona está dormida. Es habitual notar molestia después. No es la misma decisión que extraer el diente.\n\nEsto describe un proceso habitual. No es una recomendación para usted. Solo el dentista que le examine puede aconsejarle sobre su propio cuidado.",
+    "zh-Hans": "根管治疗是在牙内软组织发炎或感染时，清理牙齿内部。牙医会使用细小器械，在内部放入药物或充填，之后常常还要保护这颗牙。治疗时通常会麻醉。之后有些酸痛很常见。这和拔牙是不同的决定。\n\n这里说明的是通常流程，不是对您个人的建议。只有为您检查的牙医才能就您自己的情况给予建议。",
+    "zh-Hant": "根管治療是在牙內軟組織發炎或感染時，清理牙齒內部。牙醫會使用細小器械，在內部放入藥物或充填，之後常常還要保護這顆牙。治療時通常會麻醉。之後有些痠痛很常見。這和拔牙是不同的決定。\n\n這裡說明的是通常流程，不是對您個人的建議。只有為您檢查的牙醫才能就您自己的情況給予建議。"
+   }
+  },
+  {
+   "kind": "explainer",
+   "slug": "implants",
+   "category": "implants",
+   "sort_order": 5,
+   "version_label": "1.0",
+   "reviewer": "Dr. Elena Cho",
+   "approved": 1,
+   "media_kind": "diagram",
+   "media_url": "",
+   "title": {
+    "en": "Dental implants",
+    "es": "Implantes",
+    "zh-Hans": "种植牙",
+    "zh-Hant": "植牙"
+   },
+   "body": {
+    "en": "An implant is a small post placed in the jaw to support a replacement tooth. Healing takes time before the tooth is attached, and not every person is a candidate. The dentist reviews bone, health and home care first. Zeeno cannot tell you whether an implant is appropriate.\n\nThis describes a usual process. It is not a recommendation for you. Only the dentist who examines you can advise on your own care.",
+    "es": "Un implante es un pequeño poste colocado en el hueso para sostener un diente de reemplazo. La cicatrización lleva tiempo antes de colocar el diente, y no todas las personas son candidatas. El dentista revisa primero el hueso, la salud y el cuidado en casa. Zeeno no puede decirle si un implante es adecuado.\n\nEsto describe un proceso habitual. No es una recomendación para usted. Solo el dentista que le examine puede aconsejarle sobre su propio cuidado.",
+    "zh-Hans": "种植牙是放入颌骨、用来支撑替代牙齿的小支柱。戴上牙冠之前需要愈合时间，也不是每个人都适合。牙医会先评估骨质、健康状况和日常护理。Zeeno 不能判断您是否适合种植。\n\n这里说明的是通常流程，不是对您个人的建议。只有为您检查的牙医才能就您自己的情况给予建议。",
+    "zh-Hant": "植牙是放入頜骨、用來支撐替代牙齒的小支柱。戴上牙冠之前需要癒合時間，也不是每個人都適合。牙醫會先評估骨質、健康狀況和日常護理。Zeeno 不能判斷您是否適合植牙。\n\n這裡說明的是通常流程，不是對您個人的建議。只有為您檢查的牙醫才能就您自己的情況給予建議。"
+   }
+  },
+  {
+   "kind": "explainer",
+   "slug": "braces",
+   "category": "braces",
+   "sort_order": 6,
+   "version_label": "1.0",
+   "reviewer": "Dr. Elena Cho",
+   "approved": 1,
+   "media_kind": "diagram",
+   "media_url": "",
+   "title": {
+    "en": "Braces and aligners",
+    "es": "Ortodoncia",
+    "zh-Hans": "矫正",
+    "zh-Hant": "矯正"
+   },
+   "body": {
+    "en": "Braces and clear aligners move teeth gradually. Visits are for adjustments, checks and care of the appliance. Teeth can feel tight for a day or two after a change. Food and cleaning habits matter while you wear them. The orthodontist sets the plan. Zeeno only explains the general idea.\n\nThis describes a usual process. It is not a recommendation for you. Only the dentist who examines you can advise on your own care.",
+    "es": "Los brackets y los alineadores mueven los dientes poco a poco. Las visitas sirven para ajustes, revisiones y el cuidado del aparato. Los dientes pueden sentirse tensos uno o dos días después de un cambio. La comida y la limpieza importan mientras los lleve. El ortodoncista marca el plan. Zeeno solo explica la idea general.\n\nEsto describe un proceso habitual. No es una recomendación para usted. Solo el dentista que le examine puede aconsejarle sobre su propio cuidado.",
+    "zh-Hans": "牙套和隐形矫治器会逐步移动牙齿。复诊用来调整、检查和护理矫治器。每次调整后一两天，牙齿可能发紧。佩戴期间的饮食和清洁很重要。方案由正畸医生制定。Zeeno 只说明一般概念。\n\n这里说明的是通常流程，不是对您个人的建议。只有为您检查的牙医才能就您自己的情况给予建议。",
+    "zh-Hant": "牙套和隱形矯治器會逐步移動牙齒。複診用來調整、檢查和護理矯治器。每次調整後一兩天，牙齒可能發緊。佩戴期間的飲食和清潔很重要。方案由矯正醫師制定。Zeeno 只說明一般概念。\n\n這裡說明的是通常流程，不是對您個人的建議。只有為您檢查的牙醫才能就您自己的情況給予建議。"
+   }
+  },
+  {
+   "kind": "explainer",
+   "slug": "whitening",
+   "category": "whitening",
+   "sort_order": 7,
+   "version_label": "1.0",
+   "reviewer": "Dr. Elena Cho",
+   "approved": 1,
+   "media_kind": "diagram",
+   "media_url": "",
+   "title": {
+    "en": "Tooth whitening",
+    "es": "Blanqueamiento",
+    "zh-Hans": "牙齿美白",
+    "zh-Hant": "牙齒美白"
+   },
+   "body": {
+    "en": "Whitening uses a clinic gel or a home tray the dentist provides. It can make teeth look lighter. It can also cause temporary sensitivity. It does not repair decay, and it may not change crowns or fillings. Ask the dentist whether it fits your teeth before you start.\n\nThis describes a usual process. It is not a recommendation for you. Only the dentist who examines you can advise on your own care.",
+    "es": "El blanqueamiento usa un gel de la clínica o una férula para casa que entrega el dentista. Puede aclarar el color. También puede causar sensibilidad temporal. No repara caries y puede no cambiar coronas ni empastes. Pregunte al dentista si conviene antes de empezar.\n\nEsto describe un proceso habitual. No es una recomendación para usted. Solo el dentista que le examine puede aconsejarle sobre su propio cuidado.",
+    "zh-Hans": "美白使用诊所凝胶，或牙医提供的家用托盘。它可能让牙齿看起来更浅，也可能引起短暂敏感。它不能修复蛀牙，也不一定会改变牙冠或补牙的颜色。开始前请询问牙医是否适合您的牙齿。\n\n这里说明的是通常流程，不是对您个人的建议。只有为您检查的牙医才能就您自己的情况给予建议。",
+    "zh-Hant": "美白使用診所凝膠，或牙醫提供的家用托盤。它可能讓牙齒看起來更淺，也可能引起短暫敏感。它不能修復蛀牙，也不一定會改變牙冠或補牙的顏色。開始前請詢問牙醫是否適合您的牙齒。\n\n這裡說明的是通常流程，不是對您個人的建議。只有為您檢查的牙醫才能就您自己的情況給予建議。"
+   }
+  },
+  {
+   "kind": "explainer",
+   "slug": "extractions",
+   "category": "extraction",
+   "sort_order": 8,
+   "version_label": "1.0",
+   "reviewer": "Dr. Elena Cho",
+   "approved": 1,
+   "media_kind": "diagram",
+   "media_url": "",
+   "title": {
+    "en": "Extractions",
+    "es": "Extracciones",
+    "zh-Hans": "拔牙",
+    "zh-Hant": "拔牙"
+   },
+   "body": {
+    "en": "An extraction removes a tooth that cannot be kept, or a tooth the dentist has planned to remove. The area is usually numbed. You will feel pressure, which is different from sharp pain. Afterwards you bite on gauze and rest. The dentist will tell you how to care for the site. Zeeno does not decide that a tooth should be removed.\n\nThis describes a usual process. It is not a recommendation for you. Only the dentist who examines you can advise on your own care.",
+    "es": "Una extracción retira un diente que no se puede conservar, o uno que el dentista ha planificado quitar. La zona suele estar dormida. Notará presión, que no es lo mismo que un dolor agudo. Después muerde una gasa y descansa. El dentista le dirá cómo cuidar la zona. Zeeno no decide que un diente deba extraerse.\n\nEsto describe un proceso habitual. No es una recomendación para usted. Solo el dentista que le examine puede aconsejarle sobre su propio cuidado.",
+    "zh-Hans": "拔牙是取出无法保留、或牙医已计划取出的牙齿。通常会先麻醉。您会感到压力，这和锐痛不同。之后需要咬住纱布并休息。牙医会告诉您如何护理该处。Zeeno 不会决定某颗牙应该拔除。\n\n这里说明的是通常流程，不是对您个人的建议。只有为您检查的牙医才能就您自己的情况给予建议。",
+    "zh-Hant": "拔牙是取出無法保留、或牙醫已計劃取出的牙齒。通常會先麻醉。您會感到壓力，這和銳痛不同。之後需要咬住紗布並休息。牙醫會告訴您如何護理該處。Zeeno 不會決定某顆牙應該拔除。\n\n這裡說明的是通常流程，不是對您個人的建議。只有為您檢查的牙醫才能就您自己的情況給予建議。"
+   }
+  },
+  {
+   "kind": "orientation",
+   "slug": "what-next",
+   "category": "first-visit",
+   "sort_order": 1,
+   "version_label": "1.0",
+   "reviewer": "Dr. Elena Cho",
+   "approved": 1,
+   "media_kind": "text",
+   "media_url": "",
+   "title": {
+    "en": "What happens next",
+    "es": "Qué ocurre ahora",
+    "zh-Hans": "接下来会怎样",
+    "zh-Hant": "接下來會怎樣"
+   },
+   "body": {
+    "en": "1. Reception confirms who you are and why you are here.\n2. You may be asked to complete forms with the team, not out loud in the waiting room.\n3. You wait until a clinician is ready.\n4. The dentist examines and talks with you about options.\nNothing is decided for you by this robot. You can ask the dentist to pause or explain again.",
+    "es": "1. Recepción confirma quién es usted y por qué está aquí.\n2. Puede que le pidan completar formularios con el equipo, no en voz alta en la sala de espera.\n3. Espera hasta que un clínico esté listo.\n4. El dentista le examina y habla con usted sobre las opciones.\nEste robot no decide nada por usted. Puede pedir al dentista que pause o lo explique de nuevo.",
+    "zh-Hans": "1. 前台确认您是谁，以及今天来做什么。\n2. 可能会请您和工作人员一起填写表格，而不是在候诊区大声说明。\n3. 请等到医护人员准备好。\n4. 牙医为您检查，并和您讨论可以选择的方案。\n机器人不会替您做决定。您可以请牙医停一下，或再解释一次。",
+    "zh-Hant": "1. 前台確認您是誰，以及今天來做什麼。\n2. 可能會請您和工作人員一起填寫表格，而不是在候診區大聲說明。\n3. 請等到醫護人員準備好。\n4. 牙醫為您檢查，並和您討論可以選擇的方案。\n機器人不會替您做決定。您可以請牙醫停一下，或再解釋一次。"
+   }
+  },
+  {
+   "kind": "orientation",
+   "slug": "belongings",
+   "category": "first-visit",
+   "sort_order": 2,
+   "version_label": "1.0",
+   "reviewer": "Dr. Elena Cho",
+   "approved": 1,
+   "media_kind": "text",
+   "media_url": "",
+   "title": {
+    "en": "Belongings",
+    "es": "Sus pertenencias",
+    "zh-Hans": "随身物品",
+    "zh-Hant": "隨身物品"
+   },
+   "body": {
+    "en": "Keep your bag with you or ask reception where to place it. Remove glasses only if the clinician asks. If you use a hearing aid, you can usually keep it in. Tell the team if you need to hold a child's hand or an assistance device. The robot does not store personal items.",
+    "es": "Lleve su bolso consigo o pregunte en recepción dónde dejarlo. Quítese las gafas solo si el clínico se lo pide. Si usa un audífono, normalmente puede dejarlo puesto. Diga al equipo si necesita sujetar la mano de un niño o un dispositivo de ayuda. El robot no guarda objetos personales.",
+    "zh-Hans": "手提包请随身带着，或向前台询问可以放在哪里。只有医护人员请您摘下眼镜时才摘下。如果您使用助听器，通常可以继续戴着。如果需要牵着孩子或使用辅助器具，请告诉工作人员。机器人不保管个人物品。",
+    "zh-Hant": "手提包請隨身帶著，或向前台詢問可以放在哪裡。只有醫護人員請您摘下眼鏡時才摘下。如果您使用助聽器，通常可以繼續戴著。如果需要牽著孩子或使用輔助器具，請告訴工作人員。機器人不保管個人物品。"
+   }
+  },
+  {
+   "kind": "orientation",
+   "slug": "ask-for-help",
+   "category": "first-visit",
+   "sort_order": 3,
+   "version_label": "1.0",
+   "reviewer": "Dr. Elena Cho",
+   "approved": 1,
+   "media_kind": "text",
+   "media_url": "",
+   "title": {
+    "en": "How to ask for help",
+    "es": "Cómo pedir ayuda",
+    "zh-Hans": "如何求助",
+    "zh-Hant": "如何求助"
+   },
+   "body": {
+    "en": "Use Contact reception at any time. You can ask for appointment help, accessibility assistance, or say you feel unwell. You can also say it quietly to any team member. This robot sends a message to the clinic. It is not an emergency system. If you need urgent medical help, tell a person or call the local emergency number.",
+    "es": "Use Contactar recepción en cualquier momento. Puede pedir ayuda con la cita, asistencia de accesibilidad o decir que se encuentra mal. También puede decírselo en voz baja a cualquier persona del equipo. Este robot envía un mensaje a la clínica. No es un sistema de urgencias. Si necesita ayuda médica urgente, dígaselo a una persona o llame al número de emergencias local.",
+    "zh-Hans": "您可以随时使用“联系前台”。可以选择预约协助、无障碍协助，或说明身体不舒服。也可以小声告诉任何工作人员。机器人会给诊所发一条消息。它不是急救系统。如果需要紧急医疗帮助，请告诉现场的人，或拨打当地急救电话。",
+    "zh-Hant": "您可以隨時使用「聯絡前台」。可以選擇預約協助、無障礙協助，或說明身體不舒服。也可以小聲告訴任何工作人員。機器人會給診所發一條消息。它不是急救系統。如果需要緊急醫療幫助，請告訴現場的人，或撥打當地急救電話。"
+   }
+  },
+  {
+   "kind": "orientation",
+   "slug": "waiting",
+   "category": "first-visit",
+   "sort_order": 4,
+   "version_label": "1.0",
+   "reviewer": "Dr. Elena Cho",
+   "approved": 1,
+   "media_kind": "text",
+   "media_url": "",
+   "title": {
+    "en": "While you wait",
+    "es": "Mientras espera",
+    "zh-Hans": "等候时",
+    "zh-Hant": "等候時"
+   },
+   "body": {
+    "en": "Please stay where reception can see you, or in the waiting area if they direct you there. Zeeno does not show a queue number or a promised waiting time in this version. If you have been waiting and are unsure, contact reception. You may use the comfort and children's activities quietly.",
+    "es": "Quédese donde recepción pueda verle, o en la sala de espera si se lo indican. En esta versión Zeeno no muestra un número de turno ni un tiempo de espera prometido. Si lleva tiempo esperando y no está seguro, contacte a recepción. Puede usar en silencio las actividades de calma y para niños.",
+    "zh-Hans": "请留在前台看得到的地方，或按指引前往候诊区。这一版本的 Zeeno 不显示排队号，也不承诺等候时间。如果等了很久仍不确定，请联系前台。您可以安静使用放松和儿童活动。",
+    "zh-Hant": "請留在前台看得到的地方，或按指引前往候診區。這一版本的 Zeeno 不顯示排隊號，也不承諾等候時間。如果等了很久仍不確定，請聯絡前台。您可以安靜使用放鬆和兒童活動。"
+   }
+  },
+  {
+   "kind": "oral",
+   "slug": "brushing",
+   "category": "brushing",
+   "sort_order": 1,
+   "version_label": "1.1",
+   "reviewer": "Dr. Elena Cho",
+   "approved": 1,
+   "media_kind": "diagram",
+   "media_url": "",
+   "title": {
+    "en": "Brushing",
+    "es": "Cepillado",
+    "zh-Hans": "刷牙",
+    "zh-Hant": "刷牙"
+   },
+   "body": {
+    "en": "Use a soft brush and a small amount of fluoride toothpaste. Brush the outer, inner and chewing surfaces for about two minutes, twice a day. Gentle circles at the gumline help. Spit out the toothpaste. Your dentist can tell you whether to rinse. This is a general demonstration, not a plan written for your mouth.",
+    "es": "Use un cepillo suave y una pequeña cantidad de pasta con flúor. Cepille las caras externas, internas y de masticación unos dos minutos, dos veces al día. Círculos suaves en el borde de la encía ayudan. Escupa la pasta. Su dentista puede decirle si debe enjuagar. Es una demostración general, no un plan escrito para su boca.",
+    "zh-Hans": "使用软毛牙刷和少量含氟牙膏。每天两次，大约两分钟，刷外侧面、内侧面和咬合面。在牙龈边缘轻轻画圈会有帮助。吐掉牙膏。是否需要漱口，请听牙医的说明。这是一般示范，不是为您的口腔写的方案。",
+    "zh-Hant": "使用軟毛牙刷和少量含氟牙膏。每天兩次，大約兩分鐘，刷外側面、內側面和咬合面。在牙齦邊緣輕輕畫圈會有幫助。吐掉牙膏。是否需要漱口，請聽牙醫的說明。這是一般示範，不是為您的口腔寫的方案。"
+   }
+  },
+  {
+   "kind": "oral",
+   "slug": "interdental",
+   "category": "interdental",
+   "sort_order": 2,
+   "version_label": "1.0",
+   "reviewer": "Dr. Elena Cho",
+   "approved": 1,
+   "media_kind": "diagram",
+   "media_url": "",
+   "title": {
+    "en": "Cleaning between teeth",
+    "es": "Limpieza entre los dientes",
+    "zh-Hans": "牙缝清洁",
+    "zh-Hant": "牙縫清潔"
+   },
+   "body": {
+    "en": "Floss or an interdental brush cleans where a toothbrush does not reach. Slide it gently. Do not force it into the gum. If your dentist has given you a size of brush, use that one. Bleeding that is new or heavy should be mentioned to the team. Zeeno will not choose a product for you.",
+    "es": "El hilo o un cepillo interdental limpian donde el cepillo no llega. Deslícelo con suavidad. No lo fuerce en la encía. Si su dentista le indicó un tamaño, use ese. Si el sangrado es nuevo o abundante, dígaselo al equipo. Zeeno no elegirá un producto por usted.",
+    "zh-Hans": "牙线或牙缝刷用来清洁牙刷到不了的地方。请轻轻滑动，不要硬塞进牙龈。如果牙医给过您尺码，请用那个尺码。如果新出现出血或出血较多，请告诉工作人员。Zeeno 不会替您挑选产品。",
+    "zh-Hant": "牙線或牙縫刷用來清潔牙刷到不了的地方。請輕輕滑動，不要硬塞進牙齦。如果牙醫給過您尺碼，請用那個尺碼。如果新出現出血或出血較多，請告訴工作人員。Zeeno 不會替您挑選產品。"
+   }
+  },
+  {
+   "kind": "oral",
+   "slug": "appliance",
+   "category": "appliance",
+   "sort_order": 3,
+   "version_label": "1.0",
+   "reviewer": "Dr. Elena Cho",
+   "approved": 1,
+   "media_kind": "diagram",
+   "media_url": "",
+   "title": {
+    "en": "Caring for an appliance",
+    "es": "Cuidado de un aparato",
+    "zh-Hans": "矫治器护理",
+    "zh-Hant": "矯治器護理"
+   },
+   "body": {
+    "en": "Rinse a retainer or aligner with cool water. Brush it gently with a soft brush. Do not use hot water, which can warp it. Keep it in its case when you eat, not in a napkin. If it cracks or no longer fits, call the clinic rather than trying to adjust it yourself.",
+    "es": "Enjuague el retenedor o alineador con agua fría. Cepíllelo con suavidad con un cepillo blando. No use agua caliente, porque puede deformarlo. Guárdelo en su estuche al comer, no en una servilleta. Si se agrieta o ya no ajusta, llame a la clínica en lugar de intentar ajustarlo usted.",
+    "zh-Hans": "保持器或隐形牙套用凉水冲洗，再用软毛刷轻轻刷。不要用热水，以免变形。吃饭时放进盒子，不要包在纸巾里。如果破裂或不再贴合，请致电诊所，不要自己调整。",
+    "zh-Hant": "保持器或隱形牙套用涼水沖洗，再用軟毛刷輕輕刷。不要用熱水，以免變形。吃飯時放進盒子，不要包在紙巾裡。如果破裂或不再貼合，請致電診所，不要自己調整。"
+   }
+  },
+  {
+   "kind": "aftercare",
+   "slug": "cleaning",
+   "category": "cleaning",
+   "sort_order": 1,
+   "version_label": "1.1",
+   "reviewer": "Dr. Elena Cho",
+   "approved": 1,
+   "media_kind": "text",
+   "media_url": "",
+   "title": {
+    "en": "After a cleaning (version 1.1)",
+    "es": "Después de una limpieza (versión 1.1)",
+    "zh-Hans": "洁牙之后（版本 1.1）",
+    "zh-Hant": "潔牙之後（版本 1.1）"
+   },
+   "body": {
+    "en": "Your gums may feel tender and can bleed a little when you brush today. Brush gently this evening. Avoid very hot drinks for a few hours if the teeth feel sensitive. Call the clinic if pain increases or bleeding does not settle.\n\nThis is the clinic's general aftercare for this procedure. Follow the instructions your dentist gave you in person if they differ. Call the clinic if you are worried. This is not an emergency service.",
+    "es": "Las encías pueden estar sensibles y sangrar un poco al cepillar hoy. Cepille con suavidad esta noche. Evite bebidas muy calientes durante unas horas si hay sensibilidad. Llame a la clínica si el dolor aumenta o el sangrado no cede.\n\nEstas son las indicaciones generales de la clínica para este procedimiento. Si su dentista le dio otras en persona, siga esas. Llame a la clínica si está preocupado. Esto no es un servicio de urgencias.",
+    "zh-Hans": "今天刷牙时牙龈可能敏感，或有少量出血。今晚请轻柔刷牙。如果牙齿敏感，几小时内避免很烫的饮品。如果疼痛加重或出血不停，请致电诊所。\n\n这是本诊所针对该项目的一般护理说明。如果牙医当面给了不同的指示，请以当面指示为准。如有担心请致电诊所。这不是急救服务。",
+    "zh-Hant": "今天刷牙時牙齦可能敏感，或有少量出血。今晚請輕柔刷牙。如果牙齒敏感，幾小時內避免很燙的飲品。如果疼痛加重或出血不停，請致電診所。\n\n這是本診所針對該項目的一般護理說明。如果牙醫當面給了不同的指示，請以當面指示為準。如有擔心請致電診所。這不是急救服務。"
+   }
+  },
+  {
+   "kind": "aftercare",
+   "slug": "cleaning",
+   "category": "cleaning",
+   "sort_order": 2,
+   "version_label": "1.2",
+   "reviewer": "Dr. Elena Cho",
+   "approved": 1,
+   "media_kind": "text",
+   "media_url": "",
+   "title": {
+    "en": "After a cleaning (version 1.2)",
+    "es": "Después de una limpieza (versión 1.2)",
+    "zh-Hans": "洁牙之后（版本 1.2）",
+    "zh-Hant": "潔牙之後（版本 1.2）"
+   },
+   "body": {
+    "en": "Tenderness for a day is common. Brush tonight with a soft brush and fluoride toothpaste. If a desensitising toothpaste was recommended in person, you may use it as the dentist described. Do not start a new medicine because of this screen. Call us if you feel unwell, swelling starts, or bleeding continues.\n\nThis is the clinic's general aftercare for this procedure. Follow the instructions your dentist gave you in person if they differ. Call the clinic if you are worried. This is not an emergency service.",
+    "es": "Es habitual notar sensibilidad un día. Cepille esta noche con un cepillo suave y pasta con flúor. Si en persona le recomendaron una pasta desensibilizante, úsela como indicó el dentista. No empiece un medicamento nuevo por esta pantalla. Llámenos si se encuentra mal, aparece hinchazón o el sangrado continúa.\n\nEstas son las indicaciones generales de la clínica para este procedimiento. Si su dentista le dio otras en persona, siga esas. Llame a la clínica si está preocupado. Esto no es un servicio de urgencias.",
+    "zh-Hans": "敏感一天很常见。今晚用软毛牙刷和含氟牙膏刷牙。如果牙医当面建议了抗敏感牙膏，请按牙医说的方式使用。不要因为这个页面自行开始新的药物。如果感到不适、出现肿胀或出血持续，请致电我们。\n\n这是本诊所针对该项目的一般护理说明。如果牙医当面给了不同的指示，请以当面指示为准。如有担心请致电诊所。这不是急救服务。",
+    "zh-Hant": "敏感一天很常見。今晚用軟毛牙刷和含氟牙膏刷牙。如果牙醫當面建議了抗敏感牙膏，請按牙醫說的方式使用。不要因為這個頁面自行開始新的藥物。如果感到不適、出現腫脹或出血持續，請致電我們。\n\n這是本診所針對該項目的一般護理說明。如果牙醫當面給了不同的指示，請以當面指示為準。如有擔心請致電診所。這不是急救服務。"
+   }
+  },
+  {
+   "kind": "aftercare",
+   "slug": "filling",
+   "category": "fillings",
+   "sort_order": 3,
+   "version_label": "1.0",
+   "reviewer": "Dr. Elena Cho",
+   "approved": 1,
+   "media_kind": "text",
+   "media_url": "",
+   "title": {
+    "en": "After a filling",
+    "es": "Después de un empaste",
+    "zh-Hans": "补牙之后",
+    "zh-Hant": "補牙之後"
+   },
+   "body": {
+    "en": "Wait until the numbness has worn off before eating on that side, so you do not bite your cheek. The bite can feel high. If it still feels high tomorrow, call the clinic. Mild sensitivity to cold can happen. Sharp pain or a broken filling should be reported.\n\nThis is the clinic's general aftercare for this procedure. Follow the instructions your dentist gave you in person if they differ. Call the clinic if you are worried. This is not an emergency service.",
+    "es": "Espere a que pase el adormecimiento antes de comer por ese lado, para no morderse la mejilla. La mordida puede sentirse alta. Si mañana sigue alta, llame a la clínica. Puede haber sensibilidad leve al frío. Informe si hay dolor agudo o el empaste se rompe.\n\nEstas son las indicaciones generales de la clínica para este procedimiento. Si su dentista le dio otras en persona, siga esas. Llame a la clínica si está preocupado. Esto no es un servicio de urgencias.",
+    "zh-Hans": "麻药消退前，不要用这一侧咀嚼，以免咬到脸颊。咬合可能觉得偏高。如果明天仍然偏高，请致电诊所。对冷有轻度敏感是可能的。如果出现锐痛或补牙材料碎裂，请告知诊所。\n\n这是本诊所针对该项目的一般护理说明。如果牙医当面给了不同的指示，请以当面指示为准。如有担心请致电诊所。这不是急救服务。",
+    "zh-Hant": "麻藥消退前，不要用這一側咀嚼，以免咬到臉頰。咬合可能覺得偏高。如果明天仍然偏高，請致電診所。對冷有輕度敏感是可能的。如果出現銳痛或補牙材料碎裂，請告知診所。\n\n這是本診所針對該項目的一般護理說明。如果牙醫當面給了不同的指示，請以當面指示為準。如有擔心請致電診所。這不是急救服務。"
+   }
+  },
+  {
+   "kind": "aftercare",
+   "slug": "crown",
+   "category": "crowns",
+   "sort_order": 4,
+   "version_label": "1.1",
+   "reviewer": "Dr. Elena Cho",
+   "approved": 1,
+   "media_kind": "text",
+   "media_url": "",
+   "title": {
+    "en": "After a crown visit",
+    "es": "Después de una visita de corona",
+    "zh-Hans": "牙冠就诊之后",
+    "zh-Hant": "牙冠就診之後"
+   },
+   "body": {
+    "en": "If you have a temporary crown, chew on the other side and avoid sticky foods. If it comes off, keep it and call the clinic. Do not use household glue. Brush gently around the area. The final crown visit, if one is planned, is a separate appointment.\n\nThis is the clinic's general aftercare for this procedure. Follow the instructions your dentist gave you in person if they differ. Call the clinic if you are worried. This is not an emergency service.",
+    "es": "Si lleva una corona temporal, mastique del otro lado y evite alimentos pegajosos. Si se sale, consérvela y llame a la clínica. No use pegamento doméstico. Cepille con suavidad alrededor. La visita de la corona definitiva, si está prevista, es otra cita.\n\nEstas son las indicaciones generales de la clínica para este procedimiento. Si su dentista le dio otras en persona, siga esas. Llame a la clínica si está preocupado. Esto no es un servicio de urgencias.",
+    "zh-Hans": "如果戴着临时牙冠，请用另一侧咀嚼，并避免黏的食物。如果脱落，请保留并致电诊所。不要使用家用胶水。在该区域轻轻刷牙。如果安排了最终牙冠的就诊，那是另一次预约。\n\n这是本诊所针对该项目的一般护理说明。如果牙医当面给了不同的指示，请以当面指示为准。如有担心请致电诊所。这不是急救服务。",
+    "zh-Hant": "如果戴著臨時牙冠，請用另一側咀嚼，並避免黏的食物。如果脫落，請保留並致電診所。不要使用家用膠水。在該區域輕輕刷牙。如果安排了最終牙冠的就診，那是另一次預約。\n\n這是本診所針對該項目的一般護理說明。如果牙醫當面給了不同的指示，請以當面指示為準。如有擔心請致電診所。這不是急救服務。"
+   }
+  },
+  {
+   "kind": "aftercare",
+   "slug": "root-canal",
+   "category": "root-canal",
+   "sort_order": 5,
+   "version_label": "1.0",
+   "reviewer": "Dr. Elena Cho",
+   "approved": 1,
+   "media_kind": "text",
+   "media_url": "",
+   "title": {
+    "en": "After root canal treatment",
+    "es": "Después de una endodoncia",
+    "zh-Hans": "根管治疗之后",
+    "zh-Hant": "根管治療之後"
+   },
+   "body": {
+    "en": "The tooth may feel sore for a few days. Use only the pain relief your own clinician has already said is suitable for you. Do not take a new medicine because Zeeno mentioned soreness. Eat on the other side until the tooth is fully restored. Call the clinic if swelling, fever or severe pain starts.\n\nThis is the clinic's general aftercare for this procedure. Follow the instructions your dentist gave you in person if they differ. Call the clinic if you are worried. This is not an emergency service.",
+    "es": "El diente puede doler unos días. Use solo el analgésico que su propio clínico ya le haya dicho que es adecuado. No tome un medicamento nuevo porque Zeeno mencionó molestia. Coma del otro lado hasta que el diente esté restaurado. Llame a la clínica si empieza hinchazón, fiebre o dolor intenso.\n\nEstas son las indicaciones generales de la clínica para este procedimiento. Si su dentista le dio otras en persona, siga esas. Llame a la clínica si está preocupado. Esto no es un servicio de urgencias.",
+    "zh-Hans": "这颗牙几天内可能酸痛。请只使用您自己的医护人员已经说明适合您的止痛方式。不要因为 Zeeno 提到酸痛就自行开始新的药物。在牙齿完全修复前，用另一侧进食。如果出现肿胀、发热或剧烈疼痛，请致电诊所。\n\n这是本诊所针对该项目的一般护理说明。如果牙医当面给了不同的指示，请以当面指示为准。如有担心请致电诊所。这不是急救服务。",
+    "zh-Hant": "這顆牙幾天內可能痠痛。請只使用您自己的醫護人員已經說明適合您的止痛方式。不要因為 Zeeno 提到痠痛就自行開始新的藥物。在牙齒完全修復前，用另一側進食。如果出現腫脹、發熱或劇烈疼痛，請致電診所。\n\n這是本診所針對該項目的一般護理說明。如果牙醫當面給了不同的指示，請以當面指示為準。如有擔心請致電診所。這不是急救服務。"
+   }
+  },
+  {
+   "kind": "aftercare",
+   "slug": "extraction",
+   "category": "extraction",
+   "sort_order": 6,
+   "version_label": "1.0",
+   "reviewer": "Dr. Elena Cho",
+   "approved": 1,
+   "media_kind": "text",
+   "media_url": "",
+   "title": {
+    "en": "After an extraction",
+    "es": "Después de una extracción",
+    "zh-Hans": "拔牙之后",
+    "zh-Hant": "拔牙之後"
+   },
+   "body": {
+    "en": "Bite firmly on the gauze for the time the dentist stated. Rest today. Do not rinse hard, smoke, or drink through a straw today, because that can disturb the clot. Soft food is kinder. A little blood on the gauze can be normal. Heavy bleeding, swelling that grows, or feeling unwell means you should call the clinic.\n\nThis is the clinic's general aftercare for this procedure. Follow the instructions your dentist gave you in person if they differ. Call the clinic if you are worried. This is not an emergency service.",
+    "es": "Muerda con firmeza la gasa el tiempo que indicó el dentista. Descanse hoy. No enjuague con fuerza, no fume ni beba con pajita hoy, porque puede alterar el coágulo. La comida blanda es más amable. Un poco de sangre en la gasa puede ser normal. Sangrado abundante, hinchazón que aumenta o malestar general: llame a la clínica.\n\nEstas son las indicaciones generales de la clínica para este procedimiento. Si su dentista le dio otras en persona, siga esas. Llame a la clínica si está preocupado. Esto no es un servicio de urgencias.",
+    "zh-Hans": "请按牙医说的时间咬紧纱布。今天休息。今天不要用力漱口、吸烟或用吸管喝水，以免影响血凝块。软食更合适。纱布上有少量血可能是正常的。如果出血很多、肿胀加重或感到不适，请致电诊所。\n\n这是本诊所针对该项目的一般护理说明。如果牙医当面给了不同的指示，请以当面指示为准。如有担心请致电诊所。这不是急救服务。",
+    "zh-Hant": "請按牙醫說的時間咬緊紗布。今天休息。今天不要用力漱口、吸煙或用吸管喝水，以免影響血凝塊。軟食更合適。紗布上有少量血可能是正常的。如果出血很多、腫脹加重或感到不適，請致電診所。\n\n這是本診所針對該項目的一般護理說明。如果牙醫當面給了不同的指示，請以當面指示為準。如有擔心請致電診所。這不是急救服務。"
+   }
+  },
+  {
+   "kind": "aftercare",
+   "slug": "braces",
+   "category": "braces",
+   "sort_order": 7,
+   "version_label": "1.0",
+   "reviewer": "Dr. Elena Cho",
+   "approved": 1,
+   "media_kind": "text",
+   "media_url": "",
+   "title": {
+    "en": "After a braces visit",
+    "es": "Después de una visita de ortodoncia",
+    "zh-Hans": "矫正复诊之后",
+    "zh-Hant": "矯正複診之後"
+   },
+   "body": {
+    "en": "Teeth often feel tight for one or two days. Soft foods help. If a wire pokes, use the wax the clinic gave you and call if it still bothers you. Keep brushing around the brackets. Do not cut a wire yourself. The next visit is arranged by the clinic, not by this robot.\n\nThis is the clinic's general aftercare for this procedure. Follow the instructions your dentist gave you in person if they differ. Call the clinic if you are worried. This is not an emergency service.",
+    "es": "Los dientes suelen sentirse tensos uno o dos días. Los alimentos blandos ayudan. Si un alambre pincha, use la cera que le dio la clínica y llame si sigue molestando. Siga cepillando alrededor de los brackets. No corte un alambre usted mismo. La siguiente visita la organiza la clínica, no este robot.\n\nEstas son las indicaciones generales de la clínica para este procedimiento. Si su dentista le dio otras en persona, siga esas. Llame a la clínica si está preocupado. Esto no es un servicio de urgencias.",
+    "zh-Hans": "牙齿常常会紧一两天。软食会比较舒服。如果钢丝刺到，请用诊所给的蜡，如果仍然不舒服请致电。托槽周围要继续刷牙。不要自己剪钢丝。下次复诊由诊所安排，不是由机器人安排。\n\n这是本诊所针对该项目的一般护理说明。如果牙医当面给了不同的指示，请以当面指示为准。如有担心请致电诊所。这不是急救服务。",
+    "zh-Hant": "牙齒常常會緊一兩天。軟食會比較舒服。如果鋼絲刺到，請用診所給的蠟，如果仍然不舒服請致電。托槽周圍要繼續刷牙。不要自己剪鋼絲。下次複診由診所安排，不是由機器人安排。\n\n這是本診所針對該項目的一般護理說明。如果牙醫當面給了不同的指示，請以當面指示為準。如有擔心請致電診所。這不是急救服務。"
+   }
+  },
+  {
+   "kind": "anxiety",
+   "slug": "how-to-tell",
+   "category": "support",
+   "sort_order": 1,
+   "version_label": "1.0",
+   "reviewer": "Dr. Elena Cho",
+   "approved": 1,
+   "media_kind": "text",
+   "media_url": "",
+   "title": {
+    "en": "How to tell the team",
+    "es": "Cómo decírselo al equipo",
+    "zh-Hans": "如何告诉医护人员",
+    "zh-Hant": "如何告訴醫護人員"
+   },
+   "body": {
+    "en": "You can say: “I feel nervous. Please tell me each step before you do it, and let me raise my hand if I need a pause.” You do not have to explain why. You can also send a private note to reception from this screen. The team will not announce it in the waiting room. Nobody can promise a visit with no sensation. They can agree how to go slowly.",
+    "es": "Puede decir: “Estoy nervioso. Dígame cada paso antes de hacerlo y deje que levante la mano si necesito una pausa.” No tiene que explicar por qué. También puede enviar una nota privada a recepción desde esta pantalla. El equipo no lo anunciará en la sala de espera. Nadie puede prometer una visita sin ninguna sensación. Sí pueden acordar ir más despacio.",
+    "zh-Hans": "您可以说：“我有些紧张。请在每一步之前告诉我，如果我需要暂停，我会举手。”您不必解释原因。也可以在这个页面私下通知前台。工作人员不会在候诊区宣读。没有人能承诺看牙完全没有感觉。他们可以和您约定放慢节奏。",
+    "zh-Hant": "您可以說：「我有些緊張。請在每一步之前告訴我，如果我需要暫停，我會舉手。」您不必解釋原因。也可以在這個頁面私下通知前台。工作人員不會在候診區宣讀。沒有人能承諾看牙完全沒有感覺。他們可以和您約定放慢節奏。"
+   }
+  },
+  {
+   "kind": "anxiety",
+   "slug": "pause",
+   "category": "support",
+   "sort_order": 2,
+   "version_label": "1.0",
+   "reviewer": "Dr. Elena Cho",
+   "approved": 1,
+   "media_kind": "text",
+   "media_url": "",
+   "title": {
+    "en": "A short pause",
+    "es": "Una pausa breve",
+    "zh-Hans": "短暂停一下",
+    "zh-Hant": "短暫停一下"
+   },
+   "body": {
+    "en": "This breathing circle is a short pause. Breathe in while it grows and out while it shrinks. Stop whenever you want. It does not treat anxiety and it does not make a procedure painless. If you feel faint or unwell, contact reception and tell a person nearby.",
+    "es": "Este círculo de respiración es una pausa breve. Inspire mientras crece y espire mientras se reduce. Pare cuando quiera. No trata la ansiedad y no hace que un procedimiento sea indoloro. Si se siente mareado o mal, contacte a recepción y dígaselo a una persona cercana.",
+    "zh-Hans": "这个呼吸圆圈只是短暂停一下。圆圈变大时吸气，变小时呼气。您可以随时停止。它不能治疗焦虑，也不能让治疗变得无痛。如果您感到头晕或不适，请联系前台，并告诉身边的人。",
+    "zh-Hant": "這個呼吸圓圈只是短暫停一下。圓圈變大時吸氣，變小時呼氣。您可以隨時停止。它不能治療焦慮，也不能讓治療變得無痛。如果您感到頭暈或不適，請聯絡前台，並告訴身邊的人。"
+   }
+  },
+  {
+   "kind": "children",
+   "slug": "brush-paste",
+   "category": "brush-step",
+   "sort_order": 1,
+   "version_label": "1.0",
+   "reviewer": "Dr. Elena Cho",
+   "approved": 1,
+   "media_kind": "text",
+   "media_url": "",
+   "title": {
+    "en": "A small amount of toothpaste",
+    "es": "Una pequeña cantidad de pasta",
+    "zh-Hans": "少量牙膏",
+    "zh-Hant": "少量牙膏"
+   },
+   "body": {
+    "en": "A pea-sized amount of fluoride toothpaste is enough for a child who can spit.",
+    "es": "Para un niño que ya escupe, basta una cantidad de pasta con flúor del tamaño de un guisante.",
+    "zh-Hans": "会吐牙膏的孩子，用豌豆大小的含氟牙膏就够了。",
+    "zh-Hant": "會吐牙膏的孩子，用豌豆大小的含氟牙膏就夠了。"
+   }
+  },
+  {
+   "kind": "children",
+   "slug": "brush-outer",
+   "category": "brush-step",
+   "sort_order": 2,
+   "version_label": "1.0",
+   "reviewer": "Dr. Elena Cho",
+   "approved": 1,
+   "media_kind": "text",
+   "media_url": "",
+   "title": {
+    "en": "Outer surfaces",
+    "es": "Caras externas",
+    "zh-Hans": "外侧面",
+    "zh-Hant": "外側面"
+   },
+   "body": {
+    "en": "Brush the cheek side of the top and bottom teeth with small circles.",
+    "es": "Cepille el lado de la mejilla de arriba y de abajo con círculos pequeños.",
+    "zh-Hans": "用小圆圈刷上下牙靠脸颊的一面。",
+    "zh-Hant": "用小圓圈刷上下牙靠臉頰的一面。"
+   }
+  },
+  {
+   "kind": "children",
+   "slug": "brush-inner",
+   "category": "brush-step",
+   "sort_order": 3,
+   "version_label": "1.0",
+   "reviewer": "Dr. Elena Cho",
+   "approved": 1,
+   "media_kind": "text",
+   "media_url": "",
+   "title": {
+    "en": "Inner surfaces",
+    "es": "Caras internas",
+    "zh-Hans": "内侧面",
+    "zh-Hant": "內側面"
+   },
+   "body": {
+    "en": "Brush the tongue side, including the backs of the front teeth.",
+    "es": "Cepille el lado de la lengua, también la parte de atrás de los dientes de delante.",
+    "zh-Hans": "刷靠舌头的一面，包括前牙的内侧。",
+    "zh-Hant": "刷靠舌頭的一面，包括前牙的內側。"
+   }
+  },
+  {
+   "kind": "children",
+   "slug": "brush-chew",
+   "category": "brush-step",
+   "sort_order": 4,
+   "version_label": "1.0",
+   "reviewer": "Dr. Elena Cho",
+   "approved": 1,
+   "media_kind": "text",
+   "media_url": "",
+   "title": {
+    "en": "Chewing surfaces",
+    "es": "Caras de masticación",
+    "zh-Hans": "咬合面",
+    "zh-Hant": "咬合面"
+   },
+   "body": {
+    "en": "Brush the bumpy tops where food sits.",
+    "es": "Cepille las superficies con relieves donde se queda la comida.",
+    "zh-Hans": "刷食物容易停留的凹凸咬合面。",
+    "zh-Hant": "刷食物容易停留的凹凸咬合面。"
+   }
+  },
+  {
+   "kind": "children",
+   "slug": "brush-tongue",
+   "category": "brush-step",
+   "sort_order": 5,
+   "version_label": "1.0",
+   "reviewer": "Dr. Elena Cho",
+   "approved": 1,
+   "media_kind": "text",
+   "media_url": "",
+   "title": {
+    "en": "Tongue",
+    "es": "Lengua",
+    "zh-Hans": "舌头",
+    "zh-Hant": "舌頭"
+   },
+   "body": {
+    "en": "A gentle brush on the tongue can be part of the routine.",
+    "es": "Un cepillado suave de la lengua puede formar parte de la rutina.",
+    "zh-Hans": "轻轻刷一下舌头，也可以成为习惯的一部分。",
+    "zh-Hant": "輕輕刷一下舌頭，也可以成為習慣的一部分。"
+   }
+  },
+  {
+   "kind": "children",
+   "slug": "brush-spit",
+   "category": "brush-step",
+   "sort_order": 6,
+   "version_label": "1.0",
+   "reviewer": "Dr. Elena Cho",
+   "approved": 1,
+   "media_kind": "text",
+   "media_url": "",
+   "title": {
+    "en": "Spit the toothpaste",
+    "es": "Escupir la pasta",
+    "zh-Hans": "吐掉牙膏",
+    "zh-Hant": "吐掉牙膏"
+   },
+   "body": {
+    "en": "Spit it out. A grown-up can ask the dentist whether to rinse.",
+    "es": "Escúpala. Un adulto puede preguntar al dentista si hay que enjuagar.",
+    "zh-Hans": "把牙膏吐掉。大人可以询问牙医要不要漱口。",
+    "zh-Hant": "把牙膏吐掉。大人可以詢問牙醫要不要漱口。"
+   }
+  },
+  {
+   "kind": "children",
+   "slug": "tool-mirror",
+   "category": "tool",
+   "sort_order": 1,
+   "version_label": "1.0",
+   "reviewer": "Dr. Elena Cho",
+   "approved": 1,
+   "media_kind": "diagram",
+   "media_url": "",
+   "title": {
+    "en": "Mouth mirror",
+    "es": "Espejo bucal",
+    "zh-Hans": "口镜",
+    "zh-Hant": "口鏡"
+   },
+   "body": {
+    "en": "A small mirror helps the dentist see behind teeth. It is not sharp.",
+    "es": "Un espejo pequeño ayuda al dentista a ver detrás de los dientes. No corta.",
+    "zh-Hans": "小镜子帮助牙医看到牙齿后面。它不锋利。",
+    "zh-Hant": "小鏡子幫助牙醫看到牙齒後面。它不鋒利。"
+   }
+  },
+  {
+   "kind": "children",
+   "slug": "tool-explorer",
+   "category": "tool",
+   "sort_order": 2,
+   "version_label": "1.0",
+   "reviewer": "Dr. Elena Cho",
+   "approved": 1,
+   "media_kind": "diagram",
+   "media_url": "",
+   "title": {
+    "en": "Explorer",
+    "es": "Explorador",
+    "zh-Hans": "探针",
+    "zh-Hant": "探針"
+   },
+   "body": {
+    "en": "A thin pointer helps check grooves. The dentist uses it gently.",
+    "es": "Una punta fina ayuda a revisar los surcos. El dentista la usa con suavidad.",
+    "zh-Hans": "细细的探针用来查看牙面的沟。牙医会轻轻使用。",
+    "zh-Hant": "細細的探針用來查看牙面的溝。牙醫會輕輕使用。"
+   }
+  },
+  {
+   "kind": "children",
+   "slug": "tool-brush",
+   "category": "tool",
+   "sort_order": 3,
+   "version_label": "1.0",
+   "reviewer": "Dr. Elena Cho",
+   "approved": 1,
+   "media_kind": "diagram",
+   "media_url": "",
+   "title": {
+    "en": "Polishing brush",
+    "es": "Cepillo de pulido",
+    "zh-Hans": "抛光刷",
+    "zh-Hant": "拋光刷"
+   },
+   "body": {
+    "en": "A soft spinning brush can polish teeth. It tickles more than it hurts.",
+    "es": "Un cepillo suave que gira puede pulir los dientes. Hace más cosquillas que daño.",
+    "zh-Hans": "柔软的旋转刷可以抛光牙齿。多半是痒痒的，而不是痛。",
+    "zh-Hant": "柔軟的旋轉刷可以拋光牙齒。多半是癢癢的，而不是痛。"
+   }
+  },
+  {
+   "kind": "children",
+   "slug": "tool-suction",
+   "category": "tool",
+   "sort_order": 4,
+   "version_label": "1.0",
+   "reviewer": "Dr. Elena Cho",
+   "approved": 1,
+   "media_kind": "diagram",
+   "media_url": "",
+   "title": {
+    "en": "Suction tip",
+    "es": "Aspirador",
+    "zh-Hans": "吸唾管",
+    "zh-Hant": "吸唾管"
+   },
+   "body": {
+    "en": "This straw-like tip takes water away. It makes a humming sound.",
+    "es": "Esta punta parecida a una pajita retira el agua. Hace un zumbido.",
+    "zh-Hans": "这根像吸管的管子会吸走水，会发出嗡嗡声。",
+    "zh-Hant": "這根像吸管的管子會吸走水，會發出嗡嗡聲。"
+   }
+  },
+  {
+   "kind": "children",
+   "slug": "tool-glasses",
+   "category": "tool",
+   "sort_order": 5,
+   "version_label": "1.0",
+   "reviewer": "Dr. Elena Cho",
+   "approved": 1,
+   "media_kind": "diagram",
+   "media_url": "",
+   "title": {
+    "en": "Protective glasses",
+    "es": "Gafas de protección",
+    "zh-Hans": "防护眼镜",
+    "zh-Hant": "防護眼鏡"
+   },
+   "body": {
+    "en": "Glasses keep water and light out of the eyes. You can ask for a pair.",
+    "es": "Las gafas evitan que agua y luz lleguen a los ojos. Puede pedir unas.",
+    "zh-Hans": "眼镜用来挡住水和灯光。您可以要一副。",
+    "zh-Hant": "眼鏡用來擋住水和燈光。您可以要一副。"
+   }
+  },
+  {
+   "kind": "children",
+   "slug": "story-1",
+   "category": "story",
+   "sort_order": 1,
+   "version_label": "1.0",
+   "reviewer": "Dr. Elena Cho",
+   "approved": 1,
+   "media_kind": "text",
+   "media_url": "",
+   "title": {
+    "en": "Sam has a visit today",
+    "es": "Sam tiene una visita hoy",
+    "zh-Hans": "今天 Sam 要来诊所",
+    "zh-Hant": "今天 Sam 要來診所"
+   },
+   "body": {
+    "en": "Sam waits with a grown-up. The robot says hello quietly and does not ask Sam's full name.",
+    "es": "Sam espera con un adulto. El robot saluda en voz baja y no pide el nombre completo de Sam.",
+    "zh-Hans": "Sam 和一个大人一起等。机器人轻轻打招呼，不会问 Sam 的全名。",
+    "zh-Hant": "Sam 和一個大人一起等。機器人輕輕打招呼，不會問 Sam 的全名。"
+   }
+  },
+  {
+   "kind": "children",
+   "slug": "story-2",
+   "category": "story",
+   "sort_order": 2,
+   "version_label": "1.0",
+   "reviewer": "Dr. Elena Cho",
+   "approved": 1,
+   "media_kind": "text",
+   "media_url": "",
+   "title": {
+    "en": "At the desk",
+    "es": "En el mostrador",
+    "zh-Hans": "在前台",
+    "zh-Hant": "在前台"
+   },
+   "body": {
+    "en": "A person at reception checks the visit. Sam can hold a favourite small toy. Bags stay with the grown-up.",
+    "es": "Una persona en recepción comprueba la visita. Sam puede llevar un juguete pequeño favorito. Los bolsos se quedan con el adulto.",
+    "zh-Hans": "前台的人确认这次就诊。Sam 可以拿着一件喜欢的小玩具。包包由大人拿着。",
+    "zh-Hant": "前台的人確認這次就診。Sam 可以拿著一件喜歡的小玩具。包包由大人拿著。"
+   }
+  },
+  {
+   "kind": "children",
+   "slug": "story-3",
+   "category": "story",
+   "sort_order": 3,
+   "version_label": "1.0",
+   "reviewer": "Dr. Elena Cho",
+   "approved": 1,
+   "media_kind": "text",
+   "media_url": "",
+   "title": {
+    "en": "In the chair",
+    "es": "En el sillón",
+    "zh-Hans": "坐上牙椅",
+    "zh-Hant": "坐上牙椅"
+   },
+   "body": {
+    "en": "The chair moves slowly. Sam can raise a hand to pause. The dentist tells Sam what each tool does before using it.",
+    "es": "El sillón se mueve despacio. Sam puede levantar la mano para pausar. El dentista dice para qué sirve cada instrumento antes de usarlo.",
+    "zh-Hans": "牙椅慢慢移动。Sam 可以举手暂停。牙医在使用每件工具之前，会先说明它是做什么的。",
+    "zh-Hant": "牙椅慢慢移動。Sam 可以舉手暫停。牙醫在使用每件工具之前，會先說明它是做什麼的。"
+   }
+  },
+  {
+   "kind": "children",
+   "slug": "story-4",
+   "category": "story",
+   "sort_order": 4,
+   "version_label": "1.0",
+   "reviewer": "Dr. Elena Cho",
+   "approved": 1,
+   "media_kind": "text",
+   "media_url": "",
+   "title": {
+    "en": "Afterwards",
+    "es": "Después",
+    "zh-Hans": "之后",
+    "zh-Hant": "之後"
+   },
+   "body": {
+    "en": "Sam goes back to the grown-up. If there are instructions, a staff member chooses them. Sam does not have to type a name to play again.",
+    "es": "Sam vuelve con el adulto. Si hay indicaciones, las elige una persona del equipo. Sam no tiene que escribir un nombre para volver a jugar.",
+    "zh-Hans": "Sam 回到大人身边。如果有护理说明，由工作人员来选择。Sam 不需要输入姓名就可以再玩一次。",
+    "zh-Hant": "Sam 回到大人身邊。如果有護理說明，由工作人員來選擇。Sam 不需要輸入姓名就可以再玩一次。"
+   }
+  },
+  {
+   "kind": "consent",
+   "slug": "filling-info",
+   "category": "consent",
+   "sort_order": 1,
+   "version_label": "1.0",
+   "reviewer": "Dr. Elena Cho",
+   "approved": 1,
+   "media_kind": "text",
+   "media_url": "",
+   "title": {
+    "en": "Information about a filling",
+    "es": "Información sobre un empaste",
+    "zh-Hans": "关于补牙的说明",
+    "zh-Hant": "關於補牙的說明"
+   },
+   "body": {
+    "en": "A filling repairs a tooth after decay is removed. The dentist numbs the area when needed. You can feel pressure. This page is general information chosen by the clinic. It is not a consent form and it does not replace the dentist’s own explanation.",
+    "es": "Un empaste repara un diente después de retirar la caries. El dentista duerme la zona si hace falta. Puede notar presión. Esta página es información general elegida por la clínica. No es un consentimiento y no sustituye la explicación del dentista.",
+    "zh-Hans": "补牙是在去除蛀坏后修复牙齿。需要时牙医会麻醉。您可能会感到压力。本页是诊所选择的一般说明。它不是同意书，也不能代替牙医本人的解释。",
+    "zh-Hant": "補牙是在去除蛀壞後修復牙齒。需要時牙醫會麻醉。您可能會感到壓力。本頁是診所選擇的一般說明。它不是同意書，也不能代替牙醫本人的解釋。"
+   }
+  }
+ ],
+ "forms": [
+  {
+   "slug": "health-history",
+   "version_label": "1.0",
+   "reviewer": "Dr. Elena Cho",
+   "approved": 1,
+   "title": {
+    "en": "Health history",
+    "es": "Historia de salud",
+    "zh-Hans": "健康情况",
+    "zh-Hant": "健康情況"
+   },
+   "intro": {
+    "en": "Answer on your own phone. Please do not read these answers aloud in the waiting room. The clinic team reviews them.",
+    "es": "Responda en su teléfono. No lea estas respuestas en voz alta en la sala de espera. El equipo de la clínica las revisa.",
+    "zh-Hans": "请在您的手机上回答。不要在候诊区大声读出这些内容。诊所团队会查看。",
+    "zh-Hant": "請在您的手機上回答。不要在候診區大聲讀出這些內容。診所團隊會查看。"
+   },
+   "fields": [
+    {
+     "id": "medicines",
+     "type": "text",
+     "required": true,
+     "label": {
+      "en": "Medicines you take",
+      "es": "Medicinas que toma",
+      "zh-Hans": "正在服用的药物",
+      "zh-Hant": "正在服用的藥物"
+     }
+    },
+    {
+     "id": "allergies",
+     "type": "text",
+     "required": false,
+     "label": {
+      "en": "Allergies",
+      "es": "Alergias",
+      "zh-Hans": "过敏",
+      "zh-Hant": "過敏"
+     }
+    },
+    {
+     "id": "conditions",
+     "type": "longtext",
+     "required": false,
+     "label": {
+      "en": "Anything the dentist should know",
+      "es": "Algo que el dentista deba saber",
+      "zh-Hans": "牙医需要知道的情况",
+      "zh-Hant": "牙醫需要知道的情況"
+     }
+    }
+   ]
+  }
+ ]
+}
