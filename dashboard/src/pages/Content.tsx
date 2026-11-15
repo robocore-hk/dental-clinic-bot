@@ -3,7 +3,7 @@ import { Plus, Trash2, Upload } from 'lucide-react';
 import { del, emptyLoc, patch, post, useAction, useApi } from '../api';
 import { Empty, Field, Loading, LocEditor, Modal, PageHead, Toggle } from '../ui';
 
-const KINDS = ['faq', 'explainer', 'orientation', 'oral', 'aftercare', 'anxiety', 'children'];
+const KINDS = ['faq', 'explainer', 'orientation', 'oral', 'aftercare', 'anxiety', 'children', 'consent'];
 const blank = (kind = 'faq') => ({ kind, slug: '', category: '', sort_order: 0, version_label: '1.0', reviewer: '', approved: false, media_kind: 'text', media_url: '', title: emptyLoc(), body: emptyLoc() });
 
 export function Content({ cid }: { cid: string }) {

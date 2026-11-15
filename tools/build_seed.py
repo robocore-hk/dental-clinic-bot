@@ -414,6 +414,27 @@ def flat(item):
         row[f"body_{key}"] = item["body"][lang]
     return row
 
+add(items, "consent", "filling-info", "consent", 1, "1.0",
+    L("Information about a filling", "Información sobre un empaste", "关于补牙的说明", "關於補牙的說明"),
+    L("A filling repairs a tooth after decay is removed. The dentist numbs the area when needed. You can feel pressure. This page is general information chosen by the clinic. It is not a consent form and it does not replace the dentist’s own explanation.",
+      "Un empaste repara un diente después de retirar la caries. El dentista duerme la zona si hace falta. Puede notar presión. Esta página es información general elegida por la clínica. No es un consentimiento y no sustituye la explicación del dentista.",
+      "补牙是在去除蛀坏后修复牙齿。需要时牙医会麻醉。您可能会感到压力。本页是诊所选择的一般说明。它不是同意书，也不能代替牙医本人的解释。",
+      "補牙是在去除蛀壞後修復牙齒。需要時牙醫會麻醉。您可能會感到壓力。本頁是診所選擇的一般說明。它不是同意書，也不能代替牙醫本人的解釋。"))
+
+forms = [{
+    "slug": "health-history", "version_label": "1.0", "reviewer": REVIEWER, "approved": 1,
+    "title": L("Health history", "Historia de salud", "健康情况", "健康情況"),
+    "intro": L("Answer on your own phone. Please do not read these answers aloud in the waiting room. The clinic team reviews them.",
+               "Responda en su teléfono. No lea estas respuestas en voz alta en la sala de espera. El equipo de la clínica las revisa.",
+               "请在您的手机上回答。不要在候诊区大声读出这些内容。诊所团队会查看。",
+               "請在您的手機上回答。不要在候診區大聲讀出這些內容。診所團隊會查看。"),
+    "fields": [
+        {"id": "medicines", "type": "text", "required": True, "label": L("Medicines you take", "Medicinas que toma", "正在服用的药物", "正在服用的藥物")},
+        {"id": "allergies", "type": "text", "required": False, "label": L("Allergies", "Alergias", "过敏", "過敏")},
+        {"id": "conditions", "type": "longtext", "required": False, "label": L("Anything the dentist should know", "Algo que el dentista deba saber", "牙医需要知道的情况", "牙醫需要知道的情況")},
+    ],
+}]
+
 # Validate every patient string is non-empty and not a copy of English for zh/es.
 missing = []
 for it in items:
@@ -425,7 +446,7 @@ for it in items:
 if missing:
     raise SystemExit("untranslated: " + str(missing[:8]))
 
-seed = {"clinic": clinic, "dentists": dentists, "destinations": destinations, "content": items}
+seed = {"clinic": clinic, "dentists": dentists, "destinations": destinations, "content": items, "forms": forms}
 text = json.dumps(seed, ensure_ascii=False, indent=1)
 (ROOT / "server" / "seed.json").write_text(text + "\n", encoding="utf-8")
 asset = ROOT / "android" / "app" / "src" / "main" / "assets"

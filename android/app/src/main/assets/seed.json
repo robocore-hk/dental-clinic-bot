@@ -1246,6 +1246,84 @@
     "zh-Hans": "Sam 回到大人身边。如果有护理说明，由工作人员来选择。Sam 不需要输入姓名就可以再玩一次。",
     "zh-Hant": "Sam 回到大人身邊。如果有護理說明，由工作人員來選擇。Sam 不需要輸入姓名就可以再玩一次。"
    }
+  },
+  {
+   "kind": "consent",
+   "slug": "filling-info",
+   "category": "consent",
+   "sort_order": 1,
+   "version_label": "1.0",
+   "reviewer": "Dr. Elena Cho",
+   "approved": 1,
+   "media_kind": "text",
+   "media_url": "",
+   "title": {
+    "en": "Information about a filling",
+    "es": "Información sobre un empaste",
+    "zh-Hans": "关于补牙的说明",
+    "zh-Hant": "關於補牙的說明"
+   },
+   "body": {
+    "en": "A filling repairs a tooth after decay is removed. The dentist numbs the area when needed. You can feel pressure. This page is general information chosen by the clinic. It is not a consent form and it does not replace the dentist’s own explanation.",
+    "es": "Un empaste repara un diente después de retirar la caries. El dentista duerme la zona si hace falta. Puede notar presión. Esta página es información general elegida por la clínica. No es un consentimiento y no sustituye la explicación del dentista.",
+    "zh-Hans": "补牙是在去除蛀坏后修复牙齿。需要时牙医会麻醉。您可能会感到压力。本页是诊所选择的一般说明。它不是同意书，也不能代替牙医本人的解释。",
+    "zh-Hant": "補牙是在去除蛀壞後修復牙齒。需要時牙醫會麻醉。您可能會感到壓力。本頁是診所選擇的一般說明。它不是同意書，也不能代替牙醫本人的解釋。"
+   }
+  }
+ ],
+ "forms": [
+  {
+   "slug": "health-history",
+   "version_label": "1.0",
+   "reviewer": "Dr. Elena Cho",
+   "approved": 1,
+   "title": {
+    "en": "Health history",
+    "es": "Historia de salud",
+    "zh-Hans": "健康情况",
+    "zh-Hant": "健康情況"
+   },
+   "intro": {
+    "en": "Answer on your own phone. Please do not read these answers aloud in the waiting room. The clinic team reviews them.",
+    "es": "Responda en su teléfono. No lea estas respuestas en voz alta en la sala de espera. El equipo de la clínica las revisa.",
+    "zh-Hans": "请在您的手机上回答。不要在候诊区大声读出这些内容。诊所团队会查看。",
+    "zh-Hant": "請在您的手機上回答。不要在候診區大聲讀出這些內容。診所團隊會查看。"
+   },
+   "fields": [
+    {
+     "id": "medicines",
+     "type": "text",
+     "required": true,
+     "label": {
+      "en": "Medicines you take",
+      "es": "Medicinas que toma",
+      "zh-Hans": "正在服用的药物",
+      "zh-Hant": "正在服用的藥物"
+     }
+    },
+    {
+     "id": "allergies",
+     "type": "text",
+     "required": false,
+     "label": {
+      "en": "Allergies",
+      "es": "Alergias",
+      "zh-Hans": "过敏",
+      "zh-Hant": "過敏"
+     }
+    },
+    {
+     "id": "conditions",
+     "type": "longtext",
+     "required": false,
+     "label": {
+      "en": "Anything the dentist should know",
+      "es": "Algo que el dentista deba saber",
+      "zh-Hans": "牙医需要知道的情况",
+      "zh-Hant": "牙醫需要知道的情況"
+     }
+    }
+   ]
   }
  ]
 }

@@ -141,16 +141,16 @@ CF_API_TOKEN=… CF_ACCOUNT_ID=… BOOTSTRAP_ADMIN='admin@example.com:password' 
 
 The live worker is `https://zeeno-dental.robocore-hk.workers.dev`. `deploy.py` prints the URL again when you upload a new build.
 
-## Launch scope and Phase 2
+## Launch and Phase 2
 
-This release is the launch set from the clinic brief: welcome and language, arrival assistance, walk-in requests, escort and stationary directions, FAQ, treatment explainers, first-visit orientation, anxiety support, children’s activities, oral-care education, staff-controlled aftercare with QR, reception alerts, and private feedback.
+Launch: welcome and language, arrival assistance, walk-in requests, escort and stationary directions, FAQ, treatment explainers, first-visit orientation, anxiety support, children’s activities, oral care, staff-controlled aftercare with QR, reception alerts, and private feedback.
 
-Not in this release:
+Phase 2, in the same app:
 
-- Queue and visit-status display
-- Medical-history and form handoff
-- Consent capture
-- Remote receptionist or interpreter video (Contact reception is an inbox alert only)
-- Follow-up booking and automated reminders
+- **Visit status.** An arrival on a paired robot creates a private number such as `A3`. The patient sees “Checked in”, “Please wait for reception”, or “Please see reception”. A waiting time appears only after staff type one in Inbox → queue. The robot does not announce the patient’s name.
+- **Medical forms.** Staff (PIN on the robot, or Forms & reminders in the dashboard) issue a QR to `/f/:token`. The patient answers on their phone. Completed answers sit in the inbox for review and are not written into chatbot logs.
+- **Procedure information.** Staff choose an approved `consent` content item. The patient can read it and send questions for the dentist. The screen says this is not formal consent and does not replace the dentist.
+- **Video call.** Contact reception can start a temi video call when the clinic has a temi user id (Clinic page, or a per-robot override). The screen asks for a private spot and shows whether the call started and whether it connected.
+- **Next visit.** After aftercare, or from staff settings, the patient can request another visit (inbox, not a confirmed booking) and scan the clinic booking page if one is saved. Reminders are pending tasks for staff. The dashboard does not send SMS or email; staff send them and mark them sent.
 
-Those can be added later beside the inbox and content libraries. They are not stubbed as patient-facing buttons.
+`server/schema.sql` creates the new tables. `server/migrations/002_phase2.sql` adds `booking_url`, `video_user_id`, and `video_name` on clinics that already exist. `deploy.py` applies both and skips a column that is already there. Do not run a seed against the live worker if that clinic’s content has already been edited.

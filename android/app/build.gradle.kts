@@ -17,8 +17,8 @@ android {
         applicationId = "ai.robocore.zeeno"
         minSdk = 26
         targetSdk = 30       // temi V3 runs Android 11
-        versionCode = 1
-        versionName = "1.0.0"
+        versionCode = 2
+        versionName = "1.1.0"
         buildConfigField("String", "DEFAULT_API", "\"${project.findProperty("zeeno.api") ?: "https://zeeno-dental.robocore-hk.workers.dev"}\"")
     }
     signingConfigs {

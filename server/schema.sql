@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS clinics (
   id TEXT PRIMARY KEY, name TEXT NOT NULL, address TEXT DEFAULT '', phone TEXT DEFAULT '', email TEXT DEFAULT '', website TEXT DEFAULT '',
   hours TEXT DEFAULT '{}', parking TEXT DEFAULT '{}', payment TEXT DEFAULT '{}', accessibility TEXT DEFAULT '{}', welcome TEXT DEFAULT '{}',
   reviewer TEXT DEFAULT '', data_source_url TEXT DEFAULT '',
+  booking_url TEXT DEFAULT '', video_user_id TEXT DEFAULT '', video_name TEXT DEFAULT '',
   version INTEGER NOT NULL DEFAULT 1, created_at INTEGER NOT NULL, updated_at INTEGER NOT NULL
 );
 CREATE TABLE IF NOT EXISTS owner_clinics (user_id TEXT NOT NULL, clinic_id TEXT NOT NULL, PRIMARY KEY (user_id, clinic_id));
@@ -75,3 +76,34 @@ CREATE TABLE IF NOT EXISTS takeaway (
 );
 CREATE TABLE IF NOT EXISTS events (id INTEGER PRIMARY KEY AUTOINCREMENT, robot_id TEXT, clinic_id TEXT, type TEXT, ref TEXT, value TEXT, at INTEGER);
 CREATE INDEX IF NOT EXISTS events_clinic ON events(clinic_id, at);
+CREATE TABLE IF NOT EXISTS queue_tickets (
+  id TEXT PRIMARY KEY, clinic_id TEXT NOT NULL, robot_id TEXT, arrival_id TEXT,
+  code TEXT NOT NULL, status TEXT NOT NULL DEFAULT 'checked_in', wait_minutes INTEGER,
+  created_at INTEGER NOT NULL, updated_at INTEGER NOT NULL
+);
+CREATE INDEX IF NOT EXISTS queue_clinic ON queue_tickets(clinic_id, created_at);
+CREATE TABLE IF NOT EXISTS form_templates (
+  id TEXT PRIMARY KEY, clinic_id TEXT NOT NULL, slug TEXT NOT NULL, version_label TEXT DEFAULT '1.0', reviewer TEXT DEFAULT '',
+  approved INTEGER NOT NULL DEFAULT 0, active INTEGER NOT NULL DEFAULT 1,
+  title_en TEXT DEFAULT '', title_es TEXT DEFAULT '', title_zh_hans TEXT DEFAULT '', title_zh_hant TEXT DEFAULT '',
+  intro_en TEXT DEFAULT '', intro_es TEXT DEFAULT '', intro_zh_hans TEXT DEFAULT '', intro_zh_hant TEXT DEFAULT '',
+  fields TEXT NOT NULL DEFAULT '[]', updated_at INTEGER NOT NULL
+);
+CREATE TABLE IF NOT EXISTS form_issues (
+  token TEXT PRIMARY KEY, clinic_id TEXT NOT NULL, template_id TEXT NOT NULL, robot_id TEXT, lang TEXT NOT NULL,
+  answers TEXT, status TEXT NOT NULL DEFAULT 'issued', expires_at INTEGER NOT NULL, created_at INTEGER NOT NULL,
+  completed_at INTEGER, reviewed_at INTEGER
+);
+CREATE TABLE IF NOT EXISTS consent_questions (
+  id TEXT PRIMARY KEY, clinic_id TEXT NOT NULL, robot_id TEXT, content_id TEXT, questions TEXT NOT NULL,
+  status TEXT NOT NULL DEFAULT 'open', delivery TEXT NOT NULL DEFAULT 'stored', created_at INTEGER NOT NULL
+);
+CREATE TABLE IF NOT EXISTS reminder_templates (
+  id TEXT PRIMARY KEY, clinic_id TEXT NOT NULL, name TEXT NOT NULL,
+  body_en TEXT DEFAULT '', body_es TEXT DEFAULT '', body_zh_hans TEXT DEFAULT '', body_zh_hant TEXT DEFAULT '', updated_at INTEGER NOT NULL
+);
+CREATE TABLE IF NOT EXISTS reminders (
+  id TEXT PRIMARY KEY, clinic_id TEXT NOT NULL, label TEXT DEFAULT '', channel TEXT NOT NULL DEFAULT 'phone',
+  contact TEXT DEFAULT '', due_at INTEGER, template_id TEXT, message TEXT DEFAULT '',
+  status TEXT NOT NULL DEFAULT 'pending', created_at INTEGER NOT NULL, sent_at INTEGER
+);

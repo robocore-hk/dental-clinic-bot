@@ -55,8 +55,22 @@ def statements(sql: str):
 dbs = ok(S.get(f'{API}/d1/database', headers=H, params={'name': DBNAME}))['result']
 db = next((d for d in dbs if d['name'] == DBNAME), None) or ok(S.post(f'{API}/d1/database', headers=H, json={'name': DBNAME}))['result']
 dbid = db['uuid']; print('d1:', dbid)
-for stmt in statements((here / 'schema.sql').read_text()):
-    ok(S.post(f'{API}/d1/database/{dbid}/query', headers=H, json={'sql': stmt}))
+def apply_sql(sql: str, ignore_dup=False):
+    for stmt in statements(sql):
+        try:
+            ok(S.post(f'{API}/d1/database/{dbid}/query', headers=H, json={'sql': stmt}))
+        except SystemExit as e:
+            msg = str(e).lower()
+            if ignore_dup and ('duplicate column' in msg or 'already exists' in msg):
+                print('skip existing:', stmt.splitlines()[0][:80])
+            else:
+                raise
+apply_sql((here / 'schema.sql').read_text())
+mig = here / 'migrations'
+if mig.is_dir():
+    for path in sorted(mig.glob('*.sql')):
+        print('migration', path.name)
+        apply_sql(path.read_text(), ignore_dup=True)
 print('schema applied')
 
 bindings = [{'type': 'd1', 'name': 'DB', 'id': dbid}, {'type': 'ai', 'name': 'AI'}]

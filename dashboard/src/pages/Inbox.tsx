@@ -6,7 +6,7 @@ export function InboxPage({ cid }: { cid: string }) {
   const q = useApi<any>(`/api/clinics/${cid}/inbox`, { poll: 8000 });
   const bundle = useApi<any>(`/api/clinics/${cid}`);
   const robots = useApi<any>(`/api/robots?clinic=${cid}`, { poll: 15000 });
-  const [tab, setTab] = useState<'arrivals' | 'alerts' | 'escorts' | 'feedback' | 'aftercare'>('arrivals');
+  const [tab, setTab] = useState<'arrivals' | 'alerts' | 'escorts' | 'feedback' | 'aftercare' | 'queue' | 'forms' | 'consent'>('arrivals');
   const [robot, setRobot] = useState('');
   const [contentId, setContentId] = useState('');
   const { busy, run } = useAction();
@@ -16,7 +16,7 @@ export function InboxPage({ cid }: { cid: string }) {
     <PageHead kicker="Operations" title="Inbox" />
     <p className="subtle">Names and contact details stay in this staff view. They are not shown on public screens or in ordinary statistics.</p>
     <div className="tabs">
-      {(['arrivals', 'alerts', 'escorts', 'feedback', 'aftercare'] as const).map((t) => <button key={t} className={tab === t ? 'on' : ''} onClick={() => setTab(t)}>{t}</button>)}
+      {(['arrivals', 'queue', 'alerts', 'escorts', 'feedback', 'forms', 'consent', 'aftercare'] as const).map((t) => <button key={t} className={tab === t ? 'on' : ''} onClick={() => setTab(t)}>{t}</button>)}
     </div>
     {q.loading && !data ? <Loading /> : tab === 'arrivals' ? <Table rows={data?.arrivals} empty="No arrivals or requests yet." cols={['When', 'Type', 'Details', 'Delivery', '']} render={(r: any) => <>
       <td>{ago(r.created_at)}</td><td>{r.kind === 'walkin' ? 'Request' : 'Arrival assistance'}</td>
@@ -33,7 +33,17 @@ export function InboxPage({ cid }: { cid: string }) {
     </>} /> : tab === 'feedback' ? <Table rows={data?.feedback} empty="No feedback yet." cols={['When', 'Visit', 'Comment', 'Contact', '']} render={(r: any) => <>
       <td>{ago(r.created_at)}</td><td>{r.ease} / {r.help}</td><td>{r.comment}</td><td>{r.contact_me ? r.contact_details : '—'}</td>
       <td>{r.status === 'open' && <button className="btn small" disabled={busy} onClick={() => run(() => post(`/api/clinics/${cid}/feedback/${r.id}/ack`), 'Noted').then(q.reload)}>Mark seen</button>}</td>
-    </>} /> : <section className="card">
+    </>} /> : tab === 'queue' ? <QueueRows cid={cid} rows={data?.queue} busy={busy} run={run} reload={q.reload} />
+      : tab === 'forms' ? <Table rows={data?.forms} empty="No medical forms issued." cols={['When', 'Form', 'Status', 'Answers', '']} render={(r: any) => <>
+      <td>{ago(r.created_at)}</td><td>{r.title_en || r.slug} · v{r.version_label}</td><td>{r.status}</td>
+      <td>{r.answers ? <pre style={{ whiteSpace: 'pre-wrap', margin: 0 }}>{JSON.stringify(r.answers, null, 1)}</pre> : 'Not completed'}</td>
+      <td>{r.status === 'completed' && <button className="btn small" disabled={busy} onClick={() => run(() => post(`/api/clinics/${cid}/forms/${r.token}/review`), 'Reviewed').then(q.reload)}>Mark reviewed</button>}</td>
+    </>} />
+      : tab === 'consent' ? <Table rows={data?.consent} empty="No questions for the dentist yet." cols={['When', 'Questions', 'Delivery', '']} render={(r: any) => <>
+      <td>{ago(r.created_at)}</td><td>{r.questions}</td><td><Delivery value={r.delivery} /> {r.status}</td>
+      <td>{r.status === 'open' && <button className="btn small" disabled={busy} onClick={() => run(() => post(`/api/clinics/${cid}/consent/${r.id}/ack`), 'Noted').then(q.reload)}>Mark seen</button>}</td>
+    </>} />
+      : <section className="card">
       <h2>Send aftercare to a robot</h2>
       <p className="subtle">Staff choose the procedure and the instruction version. The patient cannot pick it. The robot shows it on the next check-in. Delivery here means the command was queued, not that the patient has read it.</p>
       <Field label="Robot"><select className="input" value={robot} onChange={(e) => setRobot(e.target.value)}><option value="">Choose</option>{(robots.data?.robots ?? []).map((r: any) => <option key={r.id} value={r.id}>{r.name}</option>)}</select></Field>
@@ -41,6 +51,28 @@ export function InboxPage({ cid }: { cid: string }) {
       <button className="btn primary" disabled={busy || !robot || !contentId} onClick={() => run(() => post(`/api/clinics/${cid}/aftercare`, { robot_id: robot, content_id: contentId }), 'Queued for the robot')}>Queue on robot</button>
     </section>}
   </div>;
+}
+
+function QueueRows({ cid, rows, busy, run, reload }: { cid: string; rows?: any[]; busy: boolean; run: any; reload: () => void }) {
+  const [wait, setWait] = useState<Record<string, string>>({});
+  if (!rows?.length) return <Empty>No visit numbers yet. A number is created when a paired robot sends an arrival notice.</Empty>;
+  return <table><thead><tr><th>Number</th><th>Status</th><th>Wait (minutes)</th><th>Staff note</th><th></th></tr></thead><tbody>
+    {rows.map((r) => <tr key={r.id}>
+      <td><b>{r.code}</b><div className="subtle">{r.reference || r.patient_name || ''}</div></td>
+      <td><select className="input" value={r.status} onChange={(e) => run(() => patchQueue(cid, r.id, { status: e.target.value }), 'Status saved').then(reload)}>
+        <option value="checked_in">Checked in</option><option value="please_wait">Please wait for reception</option><option value="ready">Please see reception</option>
+      </select></td>
+      <td><input className="input" placeholder="Blank = no estimate" value={wait[r.id] ?? (r.wait_minutes ?? '')} onChange={(e) => setWait({ ...wait, [r.id]: e.target.value })} /></td>
+      <td className="subtle">Shown only to staff. The robot does not say the patient’s name.</td>
+      <td><button className="btn small" disabled={busy} onClick={() => {
+        const raw = (wait[r.id] ?? '').trim();
+        run(() => patchQueue(cid, r.id, { wait_minutes: raw === '' ? null : Number(raw) }), raw === '' ? 'Estimate cleared' : 'Estimate saved').then(reload);
+      }}>Save wait</button></td>
+    </tr>)}
+  </tbody></table>;
+}
+function patchQueue(cid: string, id: string, body: unknown) {
+  return fetch(`/api/clinics/${cid}/queue/${id}`, { method: 'PATCH', credentials: 'same-origin', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) }).then(async (r) => { const j = await r.json(); if (!r.ok) throw new Error(j.message || 'Failed'); return j; });
 }
 
 function Table({ rows, empty, cols, render }: { rows?: any[]; empty: string; cols: string[]; render: (r: any) => any }) {

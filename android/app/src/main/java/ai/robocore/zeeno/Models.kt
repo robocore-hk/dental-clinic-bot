@@ -49,10 +49,22 @@ data class Destination(val id: String, val location: String, val kind: String, v
     }
 }
 
-data class Clinic(val name: String, val address: String, val phone: String, val email: String, val welcome: Loc, val hours: Loc, val reviewer: String) {
+data class Clinic(val name: String, val address: String, val phone: String, val email: String, val welcome: Loc, val hours: Loc, val reviewer: String, val bookingUrl: String = "", val videoUserId: String = "", val videoName: String = "") {
     companion object {
         fun from(o: JSONObject?) = if (o == null) Clinic("Zeeno", "", "", "", Loc(emptyMap()), Loc(emptyMap()), "")
-        else Clinic(o.s("name"), o.s("address"), o.s("phone"), o.s("email"), Loc.from(o, "welcome"), Loc.from(o, "hours"), o.s("reviewer"))
+        else Clinic(o.s("name"), o.s("address"), o.s("phone"), o.s("email"), Loc.from(o, "welcome"), Loc.from(o, "hours"), o.s("reviewer"), o.s("booking_url"), o.s("video_user_id"), o.s("video_name"))
+    }
+}
+
+data class FormField(val id: String, val type: String, val required: Boolean, val label: Loc)
+data class ClinicForm(val id: String, val slug: String, val version: String, val reviewer: String, val title: Loc, val intro: Loc, val fields: List<FormField>) {
+    companion object {
+        fun from(o: JSONObject) = ClinicForm(
+            o.s("id"), o.s("slug"), o.s("version_label").ifBlank { "1.0" }, o.s("reviewer"), Loc.from(o, "title"), Loc.from(o, "intro"),
+            o.optJSONArray("fields")?.objs()?.map { f ->
+                FormField(f.s("id"), f.s("type").ifBlank { "text" }, f.optBoolean("required", false) || f.optInt("required", 0) == 1, Loc.from(f, "label"))
+            } ?: emptyList(),
+        )
     }
 }
 
@@ -60,10 +72,12 @@ data class Settings(
     val defaultLang: String = "en", val languages: List<String> = I18n.LANGS, val pin: String = "2408",
     val kiosk: Boolean = true, val speed: String = "slow", val backwards: Boolean = true,
     val greetCooldownMin: Int = 8, val idleClearSeconds: Int = 90, val idleHomeMinutes: Int = 0,
+    val videoUserId: String = "", val videoName: String = "",
 ) {
     fun toJson() = JSONObject().put("defaultLang", defaultLang).put("languages", JSONArray(languages)).put("pin", pin)
         .put("kiosk", kiosk).put("speed", speed).put("backwards", backwards).put("greetCooldownMin", greetCooldownMin)
         .put("idleClearSeconds", idleClearSeconds).put("idleHomeMinutes", idleHomeMinutes)
+        .put("videoUserId", videoUserId).put("videoName", videoName)
     companion object {
         fun from(o: JSONObject?): Settings {
             val d = Settings(); if (o == null) return d
@@ -73,6 +87,7 @@ data class Settings(
                 o.optString("pin", d.pin).ifBlank { d.pin }, o.optBoolean("kiosk", true),
                 o.optString("speed", d.speed), o.optBoolean("backwards", true),
                 o.optInt("greetCooldownMin", d.greetCooldownMin), o.optInt("idleClearSeconds", d.idleClearSeconds), o.optInt("idleHomeMinutes", 0),
+                o.optString("videoUserId", ""), o.optString("videoName", ""),
             )
         }
     }
@@ -81,6 +96,7 @@ data class Settings(
 data class Config(
     val robotName: String, val settings: Settings, val version: String, val clinic: Clinic,
     val dentists: List<Dentist>, val content: List<ContentItem>, val destinations: List<Destination>, val fromSeed: Boolean,
+    val forms: List<ClinicForm> = emptyList(),
 ) {
     fun of(kind: String) = content.filter { it.kind == kind && it.approved }.sortedBy { it.sort }
     companion object {
@@ -89,6 +105,7 @@ data class Config(
             Clinic.from(o.optJSONObject("clinic")), o.optJSONArray("dentists").objs().map(Dentist::from),
             o.optJSONArray("content").objs().map(ContentItem::from).filter { it.approved },
             o.optJSONArray("destinations").objs().map(Destination::from), false,
+            o.optJSONArray("forms").objs().map(ClinicForm::from),
         )
         fun fromSeed(o: JSONObject, settings: Settings): Config {
             fun id(j: JSONObject, p: String) { if (j.optString("id").isBlank()) j.put("id", p) }
@@ -99,7 +116,8 @@ data class Config(
             }
             val dentists = o.optJSONArray("dentists").objs().mapIndexed { i, j -> id(j, "seed_d$i"); Dentist.from(j) }
             val dest = o.optJSONArray("destinations").objs().map { j -> id(j, "seed_" + j.optString("location_name")); Destination.from(j) }
-            return Config("temi", settings, "seed", Clinic.from(o.optJSONObject("clinic")), dentists, content, dest, true)
+            val forms = o.optJSONArray("forms").objs().map { j -> id(j, "seed_form_" + j.optString("slug")); ClinicForm.from(j) }
+            return Config("temi", settings, "seed", Clinic.from(o.optJSONObject("clinic")), dentists, content, dest, true, forms)
         }
     }
 }

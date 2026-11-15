@@ -25,6 +25,9 @@ export function Overview({ clinic, reload }: { clinic: any; reload: () => void }
         <Field label="Email"><input className="input" value={f.email ?? ''} onChange={(e) => set('email', e.target.value)} /></Field>
         <Field label="Default clinical reviewer" hint="Shown on content that does not name its own reviewer."><input className="input" value={f.reviewer ?? ''} onChange={(e) => set('reviewer', e.target.value)} /></Field>
         <Field label="Google Sheet URL" hint="Link-shared sheet using the sample column schema. Import it from Clinical content."><input className="input" value={f.data_source_url ?? ''} onChange={(e) => set('data_source_url', e.target.value)} /></Field>
+        <Field label="Booking page URL" hint="Optional. The robot can show this as a QR code. It does not confirm an appointment."><input className="input" value={f.booking_url ?? ''} onChange={(e) => set('booking_url', e.target.value)} /></Field>
+        <Field label="Video call temi user id" hint="Designated receptionist or interpreter. Leave blank to hide the call button."><input className="input" value={f.video_user_id ?? ''} onChange={(e) => set('video_user_id', e.target.value)} /></Field>
+        <Field label="Video call display name"><input className="input" value={f.video_name ?? ''} onChange={(e) => set('video_name', e.target.value)} /></Field>
       </div>
       <LocEditor label="Welcome" value={f.welcome} onChange={(v) => set('welcome', v)} area />
       <LocEditor label="Hours" value={f.hours} onChange={(v) => set('hours', v)} area />

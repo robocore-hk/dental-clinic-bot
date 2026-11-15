@@ -119,7 +119,9 @@ function clinicOut(g: any) {
   return {
     id: g.id, name: g.name, address: g.address ?? '', phone: g.phone ?? '', email: g.email ?? '', website: g.website ?? '',
     hours: parse(g.hours, {}), parking: parse(g.parking, {}), payment: parse(g.payment, {}), accessibility: parse(g.accessibility, {}), welcome: parse(g.welcome, {}),
-    reviewer: g.reviewer ?? '', data_source_url: g.data_source_url ?? '', version: g.version, created_at: g.created_at, updated_at: g.updated_at,
+    reviewer: g.reviewer ?? '', data_source_url: g.data_source_url ?? '',
+    booking_url: g.booking_url ?? '', video_user_id: g.video_user_id ?? '', video_name: g.video_name ?? '',
+    version: g.version, created_at: g.created_at, updated_at: g.updated_at,
   };
 }
 function dentistOut(r: any) {
@@ -160,7 +162,7 @@ async function upd(env: Env, table: string, id: string, vals: Record<string, any
   await env.DB.prepare(`UPDATE ${table} SET ${keys.map((k) => `${k}=?`).join(',')}${extra} WHERE id=?`).bind(...keys.map((k) => vals[k] ?? null), id).run();
 }
 
-const CLINIC_TEXT = ['name', 'address', 'phone', 'email', 'website', 'reviewer', 'data_source_url'] as const;
+const CLINIC_TEXT = ['name', 'address', 'phone', 'email', 'website', 'reviewer', 'data_source_url', 'booking_url', 'video_user_id', 'video_name'] as const;
 function clinicPatch(b: any) {
   const v: Record<string, any> = {};
   for (const k of CLINIC_TEXT) if (b && k in b && b[k] !== undefined) v[k] = String(b[k] ?? '');
@@ -387,7 +389,7 @@ on('POST', '/api/admin/clinics', async (req, env) => {
 });
 on('DELETE', '/api/admin/clinics/:cid', async (req, env, p) => {
   await needAdmin(req, env);
-  const tables = ['clinics:id', 'dentists:clinic_id', 'content:clinic_id', 'destinations:clinic_id', 'owner_clinics:clinic_id', 'arrivals:clinic_id', 'alerts:clinic_id', 'feedback:clinic_id', 'escorts:clinic_id', 'takeaway:clinic_id'];
+  const tables = ['clinics:id', 'dentists:clinic_id', 'content:clinic_id', 'destinations:clinic_id', 'owner_clinics:clinic_id', 'arrivals:clinic_id', 'alerts:clinic_id', 'feedback:clinic_id', 'escorts:clinic_id', 'takeaway:clinic_id', 'queue_tickets:clinic_id', 'form_templates:clinic_id', 'form_issues:clinic_id', 'consent_questions:clinic_id', 'reminder_templates:clinic_id', 'reminders:clinic_id'];
   await env.DB.batch(tables.map((s) => { const [t, c] = s.split(':'); return env.DB.prepare(`DELETE FROM ${t} WHERE ${c}=?`).bind(p.cid); }));
   await env.DB.prepare('UPDATE robots SET clinic_id=NULL WHERE clinic_id=?').bind(p.cid).run();
   return J({ ok: true });
@@ -431,13 +433,24 @@ on('GET', '/api/clinics/:cid/stats', async (req, env, p) => {
 });
 on('GET', '/api/clinics/:cid/inbox', async (req, env, p) => {
   const u = await needUser(req, env); await canClinic(env, u, p.cid);
-  const [arrivals, alerts, feedback, escorts] = await Promise.all([
+  const [arrivals, alerts, feedback, escorts, queue, forms, consent, reminders, templates] = await Promise.all([
     env.DB.prepare('SELECT * FROM arrivals WHERE clinic_id=? ORDER BY created_at DESC LIMIT 100').bind(p.cid).all<any>(),
     env.DB.prepare('SELECT * FROM alerts WHERE clinic_id=? ORDER BY created_at DESC LIMIT 100').bind(p.cid).all<any>(),
     env.DB.prepare('SELECT * FROM feedback WHERE clinic_id=? ORDER BY created_at DESC LIMIT 100').bind(p.cid).all<any>(),
     env.DB.prepare('SELECT * FROM escorts WHERE clinic_id=? ORDER BY created_at DESC LIMIT 100').bind(p.cid).all<any>(),
+    env.DB.prepare('SELECT q.*, a.reference, a.patient_name FROM queue_tickets q LEFT JOIN arrivals a ON a.id=q.arrival_id WHERE q.clinic_id=? ORDER BY q.created_at DESC LIMIT 100').bind(p.cid).all<any>(),
+    env.DB.prepare('SELECT f.token, f.template_id, f.lang, f.status, f.created_at, f.completed_at, f.reviewed_at, f.answers, t.slug, t.title_en, t.version_label FROM form_issues f LEFT JOIN form_templates t ON t.id=f.template_id WHERE f.clinic_id=? ORDER BY f.created_at DESC LIMIT 100').bind(p.cid).all<any>(),
+    env.DB.prepare('SELECT * FROM consent_questions WHERE clinic_id=? ORDER BY created_at DESC LIMIT 100').bind(p.cid).all<any>(),
+    env.DB.prepare('SELECT * FROM reminders WHERE clinic_id=? ORDER BY due_at IS NULL, due_at, created_at DESC LIMIT 100').bind(p.cid).all<any>(),
+    env.DB.prepare('SELECT * FROM form_templates WHERE clinic_id=? ORDER BY slug, version_label').bind(p.cid).all<any>(),
   ]);
-  return J({ arrivals: arrivals.results, alerts: alerts.results, feedback: feedback.results, escorts: escorts.results });
+  return J({
+    arrivals: arrivals.results, alerts: alerts.results, feedback: feedback.results, escorts: escorts.results,
+    queue: queue.results.map((r: any) => ({ ...r, wait_minutes: r.wait_minutes == null ? null : Number(r.wait_minutes) })),
+    forms: forms.results.map((r: any) => ({ ...r, answers: r.status === 'issued' ? null : parse(r.answers, null) })),
+    consent: consent.results, reminders: reminders.results,
+    form_templates: templates.results.map((r: any) => ({ ...r, title: unpack(r, 'title'), intro: unpack(r, 'intro'), fields: parse(r.fields, []), approved: !!r.approved })),
+  });
 });
 
 async function ack(env: Env, table: string, id: string, cid: string) {
@@ -695,10 +708,11 @@ on('GET', '/api/robot/config', async (req, env) => {
   const rb = await robotAuth(req, env);
   const b = rb.clinic_id ? await bundle(env, rb.clinic_id) : { clinic: null, dentists: [], content: [], destinations: [] };
   const content = b.content.filter((c) => c.approved && c.active);
+  const forms = rb.clinic_id ? (await env.DB.prepare('SELECT * FROM form_templates WHERE clinic_id=? AND approved=1 AND active=1 ORDER BY slug').bind(rb.clinic_id).all<any>()).results.map(formOut) : [];
   return J({
     robot: { id: rb.id, name: rb.name }, settings: cleanSettings(parse(rb.settings, {})),
     version: `${rb.version}.${b.clinic?.version ?? 0}`,
-    clinic: b.clinic, dentists: b.dentists.filter((d) => d.active), content, destinations: b.destinations.filter((d) => d.active),
+    clinic: b.clinic, dentists: b.dentists.filter((d) => d.active), content, destinations: b.destinations.filter((d) => d.active), forms,
   });
 });
 on('PUT', '/api/robot/settings', async (req, env) => {
@@ -750,13 +764,15 @@ function clip(s: unknown, n: number) { return String(s ?? '').trim().slice(0, n)
 on('POST', '/api/robot/arrivals', async (req, env) => {
   const rb = await robotAuth(req, env); if (!rb.clinic_id) throw new HttpError(409, 'unpaired_clinic', 'This robot is not assigned to a clinic.');
   const b = await body(req);
-  const kind = b.kind === 'walkin' ? 'walkin' : 'arrival';
+  const kind = b.kind === 'walkin' || b.kind === 'followup' ? b.kind : 'arrival';
   const id = uid('v_');
   await env.DB.prepare(`INSERT INTO arrivals (id,clinic_id,robot_id,kind,reference,patient_name,appointment_time,service,preferred_date,contact_name,contact_phone,contact_email,status,delivery,created_at)
     VALUES (?,?,?,?,?,?,?,?,?,?,?,?, 'open','stored',?)`).bind(id, rb.clinic_id, rb.id, kind, clip(b.reference, 40), clip(b.patient_name, 80), clip(b.appointment_time, 40),
     clip(b.service, 80), clip(b.preferred_date, 40), clip(b.contact_name, 80), clip(b.contact_phone, 40), clip(b.contact_email, 80), now()).run();
-  await logEvent(env, rb, kind === 'walkin' ? 'walkin' : 'arrival', null, kind);
-  return J({ id, delivery: 'stored', reached_staff: true, completed_checkin: false });
+  await logEvent(env, rb, kind === 'arrival' ? 'arrival' : kind, null, kind);
+  let ticket: any = null;
+  if (kind === 'arrival') ticket = await issueTicket(env, rb.clinic_id, rb.id, id);
+  return J({ id, delivery: 'stored', reached_staff: true, completed_checkin: false, ticket });
 });
 on('POST', '/api/robot/alerts', async (req, env) => {
   const rb = await robotAuth(req, env); if (!rb.clinic_id) throw new HttpError(409, 'unpaired_clinic', 'This robot is not assigned to a clinic.');
@@ -806,9 +822,191 @@ on('POST', '/api/robot/aftercare/token', async (req, env) => {
   const origin = new URL(req.url).origin;
   return J({ token, url: `${origin}/c/${token}`, delivery: 'stored', expires_in_days: 7 });
 });
-on('GET', '/api/health', async () => J({ ok: true, service: 'zeeno-dental', at: now() }));
+const QUEUE_STATUS = ['checked_in', 'please_wait', 'ready'];
+async function issueTicket(env: Env, cid: string, robotId: string, arrivalId: string) {
+  const n = await env.DB.prepare('SELECT COUNT(*) n FROM queue_tickets WHERE clinic_id=?').bind(cid).first<any>();
+  const code = 'A' + String((Number(n?.n) || 0) + 1);
+  const id = uid('q_'); const t = now();
+  await env.DB.prepare('INSERT INTO queue_tickets (id,clinic_id,robot_id,arrival_id,code,status,wait_minutes,created_at,updated_at) VALUES (?,?,?,?,?,?,NULL,?,?)')
+    .bind(id, cid, robotId, arrivalId, code, 'checked_in', t, t).run();
+  return { id, code, status: 'checked_in', wait_minutes: null };
+}
+const ticketOut = (r: any) => r ? { id: r.id, code: r.code, status: r.status, wait_minutes: r.wait_minutes == null ? null : Number(r.wait_minutes), updated_at: r.updated_at } : null;
+
+on('PATCH', '/api/clinics/:cid/queue/:id', async (req, env, p) => {
+  const u = await needUser(req, env); await canClinic(env, u, p.cid); const b = await body(req);
+  const row = await env.DB.prepare('SELECT id FROM queue_tickets WHERE id=? AND clinic_id=?').bind(p.id, p.cid).first<any>();
+  if (!row) throw new HttpError(404, 'not_found');
+  const status = QUEUE_STATUS.includes(b.status) ? b.status : undefined;
+  const wait = b.wait_minutes === null || b.wait_minutes === '' ? null : (Number.isFinite(Number(b.wait_minutes)) ? Math.max(0, Math.round(Number(b.wait_minutes))) : undefined);
+  if (status) await env.DB.prepare('UPDATE queue_tickets SET status=?, updated_at=? WHERE id=?').bind(status, now(), p.id).run();
+  if (wait !== undefined) await env.DB.prepare('UPDATE queue_tickets SET wait_minutes=?, updated_at=? WHERE id=?').bind(wait, now(), p.id).run();
+  const fresh = await env.DB.prepare('SELECT * FROM queue_tickets WHERE id=?').bind(p.id).first<any>();
+  return J({ ok: true, ticket: ticketOut(fresh) });
+});
+
+function formOut(r: any) {
+  return { id: r.id, clinic_id: r.clinic_id, slug: r.slug, version_label: r.version_label, reviewer: r.reviewer, approved: !!r.approved, active: r.active !== 0, title: unpack(r, 'title'), intro: unpack(r, 'intro'), fields: parse(r.fields, []), updated_at: r.updated_at };
+}
+on('POST', '/api/clinics/:cid/forms', async (req, env, p) => {
+  const u = await needUser(req, env); await canClinic(env, u, p.cid); const b = await body(req);
+  if (!String(b.slug ?? '').trim()) throw bad('slug_required', 'Enter a form id.');
+  const title = packLoc('title', b), intro = packLoc('intro', b); const id = uid('ft_');
+  await env.DB.prepare(`INSERT INTO form_templates (id,clinic_id,slug,version_label,reviewer,approved,title_en,title_es,title_zh_hans,title_zh_hant,intro_en,intro_es,intro_zh_hans,intro_zh_hant,fields,updated_at)
+    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`).bind(id, p.cid, String(b.slug), String(b.version_label || '1.0'), String(b.reviewer || ''), b.approved ? 1 : 0,
+    title.title_en, title.title_es, title.title_zh_hans, title.title_zh_hant, intro.intro_en, intro.intro_es, intro.intro_zh_hans, intro.intro_zh_hant,
+    JSON.stringify(Array.isArray(b.fields) ? b.fields : []), now()).run();
+  await bump(env, p.cid); return J({ id });
+});
+on('PATCH', '/api/forms/:id', async (req, env, p) => {
+  const u = await needUser(req, env); const b = await body(req);
+  const row = await env.DB.prepare('SELECT clinic_id FROM form_templates WHERE id=?').bind(p.id).first<any>(); if (!row) throw new HttpError(404, 'not_found');
+  await canClinic(env, u, row.clinic_id);
+  const v: Record<string, any> = {};
+  for (const k of ['slug', 'version_label', 'reviewer'] as const) if (k in b) v[k] = String(b[k] ?? '');
+  if ('approved' in b) v.approved = b.approved ? 1 : 0;
+  if ('active' in b) v.active = b.active ? 1 : 0;
+  if (b.title) Object.assign(v, packLoc('title', b));
+  if (b.intro) Object.assign(v, packLoc('intro', b));
+  if (Array.isArray(b.fields)) v.fields = JSON.stringify(b.fields);
+  await upd(env, 'form_templates', p.id, v, ', updated_at=' + now()); await bump(env, row.clinic_id); return J({ ok: true });
+});
+on('DELETE', '/api/forms/:id', async (req, env, p) => {
+  const u = await needUser(req, env);
+  const row = await env.DB.prepare('SELECT clinic_id FROM form_templates WHERE id=?').bind(p.id).first<any>(); if (!row) throw new HttpError(404, 'not_found');
+  await canClinic(env, u, row.clinic_id);
+  await env.DB.prepare('DELETE FROM form_templates WHERE id=?').bind(p.id).run(); await bump(env, row.clinic_id); return J({ ok: true });
+});
+on('POST', '/api/clinics/:cid/forms/:id/review', async (req, env, p) => {
+  const u = await needUser(req, env); await canClinic(env, u, p.cid);
+  await env.DB.prepare("UPDATE form_issues SET status='reviewed', reviewed_at=? WHERE token=? AND clinic_id=?").bind(now(), p.id, p.cid).run();
+  return J({ ok: true });
+});
+on('POST', '/api/clinics/:cid/consent/:id/ack', async (req, env, p) => {
+  const u = await needUser(req, env); await canClinic(env, u, p.cid);
+  await env.DB.prepare("UPDATE consent_questions SET status='acknowledged' WHERE id=? AND clinic_id=?").bind(p.id, p.cid).run();
+  return J({ ok: true });
+});
+on('POST', '/api/clinics/:cid/reminder-templates', async (req, env, p) => {
+  const u = await needUser(req, env); await canClinic(env, u, p.cid); const b = await body(req);
+  if (!String(b.name ?? '').trim()) throw bad('name_required', 'Enter a template name.');
+  const bodyL = packLoc('body', b); const id = uid('rt_');
+  await env.DB.prepare('INSERT INTO reminder_templates (id,clinic_id,name,body_en,body_es,body_zh_hans,body_zh_hant,updated_at) VALUES (?,?,?,?,?,?,?,?)')
+    .bind(id, p.cid, String(b.name), bodyL.body_en, bodyL.body_es, bodyL.body_zh_hans, bodyL.body_zh_hant, now()).run();
+  return J({ id });
+});
+on('GET', '/api/clinics/:cid/reminder-templates', async (req, env, p) => {
+  const u = await needUser(req, env); await canClinic(env, u, p.cid);
+  const rows = (await env.DB.prepare('SELECT * FROM reminder_templates WHERE clinic_id=? ORDER BY name').bind(p.cid).all<any>()).results;
+  return J({ templates: rows.map((r: any) => ({ ...r, body: unpack(r, 'body') })) });
+});
+on('POST', '/api/clinics/:cid/reminders', async (req, env, p) => {
+  const u = await needUser(req, env); await canClinic(env, u, p.cid); const b = await body(req);
+  const channel = ['phone', 'email', 'none'].includes(b.channel) ? b.channel : 'phone';
+  const id = uid('rm_');
+  await env.DB.prepare('INSERT INTO reminders (id,clinic_id,label,channel,contact,due_at,template_id,message,status,created_at) VALUES (?,?,?,?,?,?,?,?,\'pending\',?)')
+    .bind(id, p.cid, clip(b.label, 80), channel, clip(b.contact, 120), Number(b.due_at) || null, b.template_id || null, clip(b.message, 500), now()).run();
+  return J({ id, status: 'pending', delivery: 'stored', sent: false });
+});
+on('POST', '/api/clinics/:cid/reminders/:id', async (req, env, p) => {
+  const u = await needUser(req, env); await canClinic(env, u, p.cid); const b = await body(req);
+  const status = b.status === 'cancelled' ? 'cancelled' : 'sent';
+  await env.DB.prepare('UPDATE reminders SET status=?, sent_at=? WHERE id=? AND clinic_id=?').bind(status, status === 'sent' ? now() : null, p.id, p.cid).run();
+  return J({ ok: true, status, note: 'Marked by staff. This app does not send SMS or email.' });
+});
+
+on('GET', '/api/robot/queue/:id', async (req, env, p) => {
+  const rb = await robotAuth(req, env);
+  const row = await env.DB.prepare('SELECT id, code, status, wait_minutes, updated_at FROM queue_tickets WHERE id=? AND robot_id=?').bind(p.id, rb.id).first<any>();
+  if (!row) throw new HttpError(404, 'not_found');
+  return J(ticketOut(row));
+});
+on('GET', '/api/robot/queue-lookup', async (req, env, _p, url) => {
+  const rb = await robotAuth(req, env); if (!rb.clinic_id) throw new HttpError(409, 'unpaired_clinic', 'This robot is not assigned to a clinic.');
+  const code = String(url.searchParams.get('code') ?? '').trim().toUpperCase();
+  const row = await env.DB.prepare('SELECT id, code, status, wait_minutes, updated_at, robot_id FROM queue_tickets WHERE clinic_id=? AND code=?').bind(rb.clinic_id, code).first<any>();
+  if (!row) throw new HttpError(404, 'not_found', 'That visit number was not found.');
+  return J(ticketOut(row));
+});
+on('GET', '/api/robot/forms', async (req, env) => {
+  const rb = await robotAuth(req, env); if (!rb.clinic_id) return J({ templates: [] });
+  const rows = (await env.DB.prepare('SELECT * FROM form_templates WHERE clinic_id=? AND approved=1 AND active=1 ORDER BY slug').bind(rb.clinic_id).all<any>()).results;
+  return J({ templates: rows.map(formOut) });
+});
+on('POST', '/api/robot/forms', async (req, env) => {
+  const rb = await robotAuth(req, env); if (!rb.clinic_id) throw new HttpError(409, 'unpaired_clinic', 'This robot is not assigned to a clinic.');
+  const b = await body(req);
+  const tpl = await env.DB.prepare('SELECT id FROM form_templates WHERE id=? AND clinic_id=? AND approved=1 AND active=1').bind(b.template_id, rb.clinic_id).first<any>();
+  if (!tpl) throw bad('not_approved', 'Choose an approved form.');
+  const token = rand(12); const lang = pickLang(String(b.lang ?? 'en'));
+  await env.DB.prepare('INSERT INTO form_issues (token,clinic_id,template_id,robot_id,lang,status,expires_at,created_at) VALUES (?,?,?,?,?,\'issued\',?,?)')
+    .bind(token, rb.clinic_id, tpl.id, rb.id, lang, now() + 2 * 864e5, now()).run();
+  await logEvent(env, rb, 'form', tpl.id, 'issued');
+  return J({ token, url: `${new URL(req.url).origin}/f/${token}`, delivery: 'stored', reached_staff: true });
+});
+on('POST', '/api/public/forms/:token', async (req, env, p) => {
+  const row = await env.DB.prepare('SELECT * FROM form_issues WHERE token=?').bind(p.token).first<any>();
+  if (!row || row.expires_at < now()) throw new HttpError(404, 'expired', 'This form link has expired.');
+  if (row.status !== 'issued') throw bad('already_sent', 'These answers were already sent to the clinic.');
+  const b = await body(req);
+  const answers = b.answers && typeof b.answers === 'object' ? b.answers : {};
+  const clean: Record<string, string> = {};
+  for (const [k, v] of Object.entries(answers)) clean[String(k).slice(0, 40)] = String(v ?? '').slice(0, 2000);
+  await env.DB.prepare("UPDATE form_issues SET answers=?, status='completed', completed_at=? WHERE token=?").bind(JSON.stringify(clean), now(), p.token).run();
+  await env.DB.prepare('INSERT INTO events (robot_id,clinic_id,type,ref,value,at) VALUES (?,?,?,?,?,?)').bind(row.robot_id, row.clinic_id, 'form', row.template_id, 'completed', now()).run();
+  return J({ ok: true, delivery: 'stored', reached_staff: true });
+});
+on('POST', '/api/robot/consent-questions', async (req, env) => {
+  const rb = await robotAuth(req, env); if (!rb.clinic_id) throw new HttpError(409, 'unpaired_clinic', 'This robot is not assigned to a clinic.');
+  const b = await body(req);
+  const item = await env.DB.prepare("SELECT id FROM content WHERE id=? AND clinic_id=? AND kind='consent' AND approved=1").bind(b.content_id, rb.clinic_id).first<any>();
+  if (!item) throw bad('not_approved', 'Choose approved procedure information.');
+  const questions = clip(b.questions, 1000);
+  if (!questions) throw bad('empty', 'Write a question, or go back without sending one.');
+  const id = uid('cq_');
+  await env.DB.prepare('INSERT INTO consent_questions (id,clinic_id,robot_id,content_id,questions,status,delivery,created_at) VALUES (?,?,?,?,?,\'open\',\'stored\',?)')
+    .bind(id, rb.clinic_id, rb.id, item.id, questions, now()).run();
+  await logEvent(env, rb, 'consent', item.id, 'questions');
+  return J({ id, delivery: 'stored', reached_staff: true });
+});
+
+on('GET', '/api/health', async () => J({ ok: true, service: 'zeeno-dental', phase2: true, at: now() }));
 
 function esc(s: string) { return s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]!)); }
+async function formPage(env: Env, token: string) {
+  const row = await env.DB.prepare('SELECT * FROM form_issues WHERE token=?').bind(token).first<any>();
+  if (!row || row.expires_at < now()) return new Response('This form link has expired. Ask the clinic for a new one.', { status: 404, headers: { 'content-type': 'text/plain; charset=utf-8' } });
+  const tpl = await env.DB.prepare('SELECT * FROM form_templates WHERE id=?').bind(row.template_id).first<any>();
+  const clinic = await env.DB.prepare('SELECT name, phone FROM clinics WHERE id=?').bind(row.clinic_id).first<any>();
+  if (!tpl || !clinic) return new Response('Not found', { status: 404 });
+  if (row.status !== 'issued') return new Response('These answers were already sent to the clinic. You can close this page.', { headers: { 'content-type': 'text/plain; charset=utf-8' } });
+  const lang = pickLang(row.lang);
+  const fields = parse<any[]>(tpl.fields, []);
+  const inputs = fields.map((f) => {
+    const label = esc(String(f.label?.[lang] || f.label?.en || f.id || ''));
+    const id = esc(String(f.id || ''));
+    const req = f.required ? 'required' : '';
+    const box = f.type === 'longtext' ? `<textarea name="${id}" ${req}></textarea>` : `<input name="${id}" ${req} />`;
+    return `<label>${label}${box}</label>`;
+  }).join('');
+  const title = esc(textOf(tpl, lang, 'title'));
+  const introMap = unpack(tpl, 'intro') as Record<string, string>;
+  const intro = esc(introMap[lang] || introMap.en || '').replace(/\n/g, '<br>');
+  const note = lang === 'es' ? 'Complételo en su teléfono. No diga estas respuestas en voz alta en la sala de espera.'
+    : lang === 'zh-Hans' ? '请在您的手机上填写。不要在候诊区大声说出这些内容。'
+    : lang === 'zh-Hant' ? '請在您的手機上填寫。不要在候診區大聲說出這些內容。'
+    : 'Complete this on your phone. Do not say these answers aloud in the waiting room.';
+  const html = `<!doctype html><html lang="${esc(lang)}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${title}</title>
+<style>body{margin:0;background:#F4F7F9;color:#101010;font-family:system-ui,sans-serif}main{max-width:640px;margin:0 auto;padding:28px 18px 48px}h1{color:#000F3A}label{display:block;margin:14px 0;font-weight:600}input,textarea{width:100%;margin-top:6px;padding:12px;border:1px solid #DFE3E6;border-radius:12px;font:inherit}textarea{min-height:120px}button{background:#1F1FFF;color:#fff;border:0;border-radius:999px;padding:14px 22px;font-weight:700} .note{color:#54595F}</style></head>
+<body><main><p class="note">Zeeno · ${esc(clinic.name || '')}</p><h1>${title}</h1><p>${intro}</p><p class="note">${note}</p>
+<form id="f">${inputs}<p class="note">Version ${esc(tpl.version_label || '')} · ${esc(tpl.reviewer || '')}</p><button type="submit">Send to the clinic</button><p id="out" class="note"></p></form>
+<script>
+document.getElementById('f').onsubmit=async function(e){e.preventDefault();const answers={};new FormData(e.target).forEach((v,k)=>{answers[k]=String(v)});
+const r=await fetch('/api/public/forms/${esc(token)}',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({answers})});
+const j=await r.json().catch(()=>({}));document.getElementById('out').textContent=r.ok?'Sent to the clinic team. You can close this page.':(j.message||'Not sent. Please try again or tell reception.');if(r.ok)e.target.querySelector('button').disabled=true;};
+</script></main></body></html>`;
+  return new Response(html, { headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store', 'referrer-policy': 'no-referrer' } });
+}
 async function takeawayPage(env: Env, token: string) {
   const row = await env.DB.prepare('SELECT * FROM takeaway WHERE token=?').bind(token).first<any>();
   if (!row || row.expires_at < now()) return new Response('This page has expired. Please ask the clinic for another copy.', { status: 404, headers: { 'content-type': 'text/plain; charset=utf-8' } });
@@ -843,6 +1041,7 @@ export default {
   async fetch(req: Request, env: Env): Promise<Response> {
     const url = new URL(req.url);
     if (url.pathname.startsWith('/c/')) return takeawayPage(env, url.pathname.slice(3));
+    if (url.pathname.startsWith('/f/')) return formPage(env, url.pathname.slice(3));
     if (url.pathname.startsWith('/api/')) {
       try {
         if (!booted) { await ensureBootstrap(env); booted = true; }

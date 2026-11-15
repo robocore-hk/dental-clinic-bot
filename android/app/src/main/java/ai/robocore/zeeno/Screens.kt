@@ -106,12 +106,16 @@ class NoteScreen(a: MainActivity, private val text: String) : Screen(a) {
 class ArrivalScreen(a: MainActivity) : Screen(a) {
     override val mode = "arrival"
     override val sensitive = true
-    private var ref = ""; private var name = ""; private var time = ""; private var phase = 0
+    private var ref = ""; private var name = ""; private var time = ""; private var phase = -1
     private var result: Delivery? = null
+    private var ticketId = ""; private var ticketCode = ""
     private var focus = "ref"
     override fun build(): View = a.page(I18n.t("arrival_title"), I18n.t("tile_appt")) { col ->
         col.addView(a.tv(I18n.t("arrival_lead"), 26, 400, C.BODY, 4))
-        if (phase == 0) {
+        if (phase < 0) {
+            col.addView(a.bigBtn(I18n.t("tile_appt"), I18n.t("arrival_lead")).apply { tap { phase = 0; refresh() } })
+            col.addView(a.bigBtn(I18n.t("see_status"), I18n.t("status_private")).apply { tap { a.push(VisitStatusScreen(a, "")) } })
+        } else if (phase == 0) {
             fun box(key: String, label: String, value: String) = a.fieldLabel(label, value).apply {
                 background = if (focus == key) rounded(0, 0) else null
                 tap { focus = key; refresh() }
@@ -139,6 +143,12 @@ class ArrivalScreen(a: MainActivity) : Screen(a) {
         } else {
             val d = result
             col.addView(a.statusCard(d?.ok == true, if (d?.ok == true) I18n.t("not_checkin") else (d?.detail ?: I18n.t("not_confirmed"))))
+            if (d?.ok == true && ticketCode.isNotBlank()) {
+                col.addView(a.tv(I18n.t("your_number"), 22, 650, C.BLUE))
+                col.addView(a.tv(ticketCode, 72, 700, C.NAVY))
+                col.addView(a.tv(I18n.t("status_private"), 22, 400, C.BODY, 3))
+                col.addView(a.textBtn(I18n.t("see_status"), true).apply { tap { a.push(VisitStatusScreen(a, ticketId)) } })
+            }
             col.addView(a.textBtn(I18n.t("fallback"), false).apply { tap { a.push(ContactScreen(a, "appointment")) } })
             col.addView(a.textBtn(I18n.t("done"), true).apply { tap { a.home() } })
         }
@@ -150,8 +160,9 @@ class ArrivalScreen(a: MainActivity) : Screen(a) {
         val body = JSONObject().put("kind", "arrival").put("reference", ref.trim()).put("patient_name", name.trim()).put("appointment_time", time.trim())
         App.bg {
             val d = App.repo.deliver("/api/robot/arrivals", body)
+            val ticket = d.raw?.optJSONObject("ticket")
             App.agent.log("arrival", null, if (d.ok) "stored" else "failed")
-            App.main { result = d; if (a.top === this) refresh() }
+            App.main { result = d; ticketId = ticket?.optString("id") ?: ""; ticketCode = ticket?.optString("code") ?: ""; if (a.top === this) refresh() }
         }
     }
     override fun onHide() { if (phase == 2) { ref = ""; name = ""; time = "" } }
@@ -515,6 +526,9 @@ class ContactScreen(a: MainActivity, private val preset: String? = null) : Scree
         val d = result
         if (d != null) col.addView(a.statusCard(d.ok, d.detail))
         col.addView(a.textBtn(I18n.t("send"), true).apply { tap { send() } })
+        col.addView(a.tv(I18n.t("video_offer"), 28, 650, C.NAVY))
+        col.addView(a.tv(I18n.t("video_private"), 22, 400, C.BODY, 4))
+        col.addView(a.textBtn(I18n.t("video_start"), false).apply { tap { a.push(VideoCallScreen(a)) } })
     }
     private fun send() {
         if (reason.isBlank()) { a.toast(I18n.t("reason_question")); return }
@@ -599,6 +613,9 @@ class SettingsScreen(a: MainActivity) : Screen(a) {
             }
         })
         col.addView(a.textBtn(I18n.t("aftercare_pick"), true).apply { tap { a.push(AftercareStaffScreen(a)) } })
+        col.addView(a.textBtn(I18n.t("medical_form"), false).apply { tap { a.push(FormStaffScreen(a)) } })
+        col.addView(a.textBtn(I18n.t("consent_title"), false).apply { tap { a.push(ConsentStaffScreen(a)) } })
+        col.addView(a.textBtn(I18n.t("follow_title"), false).apply { tap { a.push(FollowUpScreen(a)) } })
         col.addView(a.row().apply {
             addView(a.textBtn(I18n.t("go_home"), false).apply { tap { App.temi.goHome(); a.toast(I18n.t("go_home")) } })
             addView(a.textBtn(I18n.t("exit"), false).apply { tap { a.quit() } }, a.lp(l = 12))
@@ -644,7 +661,10 @@ class AftercarePatientScreen(a: MainActivity, private val item: ContentItem) : S
             col.addView(ImageView(a).apply { setImageBitmap(qr(link, U.d(360))) }, LinearLayout.LayoutParams(U.d(360), U.d(360)))
         } else if (failed || !App.prefs.paired) col.addView(a.tv(I18n.t("qr_offline"), 24, 500, C.NAVY, 4))
         else col.addView(a.tv(I18n.t("takeaway"), 24, 500, C.MUTED))
-        col.addView(a.textBtn(I18n.t("done"), true).apply { tap { a.home() } })
+        col.addView(a.row().apply {
+            addView(a.textBtn(I18n.t("follow_title"), false).apply { tap { a.push(FollowUpScreen(a)) } })
+            addView(a.textBtn(I18n.t("done"), true).apply { tap { a.home() } }, a.lp(l = 12))
+        })
     }
     override fun onShow() {
         if (requested) return
@@ -678,7 +698,7 @@ private class ToothSketch(context: android.content.Context, private val kind: St
     }
 }
 
-private fun qr(text: String, size: Int): Bitmap {
+internal fun qr(text: String, size: Int): Bitmap {
     val matrix = QRCodeWriter().encode(text, BarcodeFormat.QR_CODE, size, size, mapOf(EncodeHintType.MARGIN to 1))
     val bmp = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888)
     for (x in 0 until size) for (y in 0 until size) bmp.setPixel(x, y, if (matrix.get(x, y)) C.NAVY else C.WHITE)

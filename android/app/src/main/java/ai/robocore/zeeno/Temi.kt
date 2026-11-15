@@ -54,6 +54,13 @@ class Temi {
             }
         })
         robot.addTtsListener(object : Robot.TtsListener { override fun onTtsStatusChanged(ttsRequest: TtsRequest) { speaker.onStatus(ttsRequest) } })
+        runCatching {
+            robot.addOnTelepresenceStatusChangedListener(object : com.robotemi.sdk.listeners.OnTelepresenceStatusChangedListener("") {
+                override fun onTelepresenceStatusChanged(callState: com.robotemi.sdk.telepresence.CallState) {
+                    App.main { onCall?.invoke(callState.state.name) }
+                }
+            })
+        }
         ready = runCatching { robot.isReady }.getOrDefault(false)
     }
 
@@ -63,7 +70,7 @@ class Temi {
     fun hasLocation(name: String) = name.isNotBlank() && (locationPoses.containsKey(name.lowercase()) || locations().contains(name.lowercase()))
     fun granted(p: Permission) = runCatching { robot.checkSelfPermission(p) == Permission.GRANTED }.getOrDefault(false)
     fun requestPermissions() {
-        val missing = listOf(Permission.MAP, Permission.SETTINGS).filter { !granted(it) }
+        val missing = listOf(Permission.MAP, Permission.SETTINGS, Permission.MEETINGS).filter { !granted(it) }
         if (missing.isNotEmpty()) runCatching { robot.requestPermissions(missing, 11) }
     }
     fun applyKiosk(on: Boolean) = runCatching {
@@ -79,6 +86,17 @@ class Temi {
     fun goTo(location: String, backwards: Boolean, speed: String) = runCatching { robot.goTo(location.lowercase(), backwards = backwards, noBypass = null, speedLevel = speed(speed)) }
     fun goHome() = runCatching { robot.goTo("home base") }
     fun stop() = runCatching { robot.stopMovement() }
+
+    /** Starts a temi video call. Returns true only when the SDK accepted the call, not when someone answered. */
+    var onCall: ((String) -> Unit)? = null
+    fun call(userId: String, name: String): Boolean {
+        if (userId.isBlank()) return false
+        if (!granted(Permission.MEETINGS)) { requestPermissions(); return false }
+        val meeting = runCatching { robot.startMeeting(listOf(com.robotemi.sdk.telepresence.Participant(userId, com.robotemi.sdk.constants.Platform.MOBILE)), false, false) }.getOrNull()
+        if (!meeting.isNullOrBlank() && meeting != "403") return true
+        val tele = runCatching { robot.startTelepresence(name.ifBlank { "Reception" }, userId, com.robotemi.sdk.constants.Platform.MOBILE) }.getOrNull()
+        return !tele.isNullOrBlank() && tele != "403"
+    }
 
     val speaker = Speaker()
     inner class Speaker {

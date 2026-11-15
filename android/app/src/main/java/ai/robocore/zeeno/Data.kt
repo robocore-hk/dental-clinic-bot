@@ -43,7 +43,7 @@ class Api(private val prefs: Prefs) {
     fun post(path: String, body: JSONObject) = send("POST", path, body)
 }
 
-data class Delivery(val ok: Boolean, val detail: String, val id: String? = null)
+data class Delivery(val ok: Boolean, val detail: String, val id: String? = null, val raw: JSONObject? = null)
 
 class Repo(private val ctx: Context, private val prefs: Prefs, private val api: Api) {
     @Volatile var config: Config = load(); private set
@@ -82,10 +82,8 @@ class Repo(private val ctx: Context, private val prefs: Prefs, private val api: 
         if (!prefs.paired) return Delivery(false, I18n.t("not_connected"))
         return try {
             val r = api.post(path, body)
-            val stored = r.optString("delivery") == okValue && (r.optBoolean("reached_staff") || okValue != "stored")
-            if (r.optString("delivery") == "stored" && r.optBoolean("reached_staff")) Delivery(true, I18n.t("reached"), r.optString("id"))
-            else if (stored) Delivery(true, I18n.t("reached"), r.optString("id").ifBlank { null })
-            else Delivery(false, I18n.t("not_confirmed"))
+            if (r.optString("delivery") == "stored" && r.optBoolean("reached_staff")) Delivery(true, I18n.t("reached"), r.optString("id").ifBlank { null }, r)
+            else Delivery(false, I18n.t("not_confirmed"), null, r)
         } catch (_: Exception) { Delivery(false, I18n.t("not_confirmed")) }
     }
 }

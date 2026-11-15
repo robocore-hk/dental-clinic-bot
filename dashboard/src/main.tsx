@@ -1,6 +1,6 @@
 import { createRoot } from 'react-dom/client';
 import { useEffect, useState } from 'react';
-import { LayoutGrid, Stethoscope, Library, Inbox, Bot, Map as MapIcon, BarChart3, Shield, LogOut, KeyRound } from 'lucide-react';
+import { LayoutGrid, Stethoscope, Library, Inbox, Bot, Map as MapIcon, BarChart3, Shield, LogOut, KeyRound, CalendarClock } from 'lucide-react';
 import './styles.css';
 import { get, post, useApi, useAction } from './api';
 import { Field, Loading, Modal, Toasts } from './ui';
@@ -11,10 +11,11 @@ import { InboxPage } from './pages/Inbox';
 import { Robots } from './pages/Robots';
 import { MapPage } from './pages/MapPage';
 import { Stats } from './pages/Stats';
+import { Follow } from './pages/Follow';
 import { Admin } from './pages/Admin';
 
 export type User = { id: string; email: string; name: string; role: 'admin' | 'owner' };
-export type Page = 'overview' | 'dentists' | 'content' | 'inbox' | 'robots' | 'map' | 'stats' | 'admin';
+export type Page = 'overview' | 'dentists' | 'content' | 'inbox' | 'follow' | 'robots' | 'map' | 'stats' | 'admin';
 
 function Login({ onDone }: { onDone: (u: User) => void }) {
   const [email, setEmail] = useState(''); const [pw, setPw] = useState(''); const { busy, run } = useAction();
@@ -57,7 +58,7 @@ function App() {
   if (user === undefined) return <div className="center-page"><Loading /></div>;
   if (!user) return <><Login onDone={setUser} /><Toasts /></>;
   const clinic = clinics.find((x) => x.id === cid) ?? null;
-  const nav: [Page, string, any][] = [['overview', 'Clinic', LayoutGrid], ['dentists', 'Dentists', Stethoscope], ['content', 'Clinical content', Library], ['inbox', 'Inbox', Inbox], ['robots', 'Robots', Bot], ['map', 'Map', MapIcon], ['stats', 'Statistics', BarChart3]];
+  const nav: [Page, string, any][] = [['overview', 'Clinic', LayoutGrid], ['dentists', 'Dentists', Stethoscope], ['content', 'Clinical content', Library], ['inbox', 'Inbox', Inbox], ['follow', 'Forms & reminders', CalendarClock], ['robots', 'Robots', Bot], ['map', 'Map', MapIcon], ['stats', 'Statistics', BarChart3]];
   if (user.role === 'admin') nav.push(['admin', 'Admin', Shield]);
   const needClinic = page !== 'admin' && page !== 'stats';
   return <div className="shell">
@@ -81,6 +82,7 @@ function App() {
         : page === 'dentists' && clinic ? <Dentists cid={clinic.id} />
         : page === 'content' && clinic ? <Content cid={clinic.id} />
         : page === 'inbox' && clinic ? <InboxPage cid={clinic.id} />
+        : page === 'follow' && clinic ? <Follow cid={clinic.id} />
         : page === 'robots' && clinic ? <Robots cid={clinic.id} user={user} clinics={clinics} go={setPage} />
         : page === 'map' && clinic ? <MapPage cid={clinic.id} />
         : page === 'stats' ? <Stats cid={clinic?.id ?? null} admin={user.role === 'admin'} clinics={clinics} />
